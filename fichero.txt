@@ -1,0 +1,6 @@
+Esto es la primera linea
+Y esta la segunda
+y una más despues de rama
+añadiendo linea para diff
+modificacion para hacer el reset
+modificacion para restore

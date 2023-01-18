@@ -1,0 +1,3 @@
+Esto es del fichero 2
+y mas
+prueba desde eclipse con git
