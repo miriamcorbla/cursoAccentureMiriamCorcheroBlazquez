@@ -25,7 +25,6 @@ public class DatosArray {
 			}
 			System.out.println("");
 		}
-
 	}
 
 }
