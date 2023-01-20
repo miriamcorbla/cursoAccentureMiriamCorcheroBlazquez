@@ -1,5 +1,10 @@
 package ejercicio05;
 
+/**
+ * Clase que calcula el factorial de un número
+ * @author m.corchero.blazquez
+ * @version 1.0
+ */
 public class Factorial {
 
 	public static void main(String[] args) {

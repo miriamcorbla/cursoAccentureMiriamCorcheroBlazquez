@@ -1,9 +1,9 @@
 package ejercicio03;
 
 /**
- * Clase que a través de su método principal se declaran dos vectores, 
+ * Clase que a través de su método principal declara dos vectores, 
  * tal y como indica el enunciado del ejercicio y posteriormente se asigna
- * de manera automatica a traves del for los valores de 
+ * de manera automática a través del for los valores de 
  * los días en las posiciones adecuadas.
  * @author m.corchero.blazquez
  * @version 1.2

@@ -1,5 +1,10 @@
 package ejercicio05;
 
+/**
+ * Clase que imprime un cuadrado dado el tamaño del lado
+ * @author m.corchero.blazquez
+ * @version 1.0
+ */
 public class DibujaCuadrado {
 
 	public static void main(String[] args) {

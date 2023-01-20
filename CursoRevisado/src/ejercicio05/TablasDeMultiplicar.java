@@ -1,5 +1,10 @@
 package ejercicio05;
 
+/**
+ * Mostrar por pantalla las tablas de multiplicar del 1 al 10
+ * @author m.corchero.blazquez
+ * @version 1.0
+ */
 public class TablasDeMultiplicar {
 
 	public static void main(String[] args) {

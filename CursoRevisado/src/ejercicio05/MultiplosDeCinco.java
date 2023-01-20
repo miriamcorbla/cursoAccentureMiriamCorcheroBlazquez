@@ -1,5 +1,9 @@
 package ejercicio05;
-//Calcula la suma de los 10 primeros numeros multiplos de 5
+/**
+ * Calcula la suma de los 10 primeros numeros multiplos de 5
+ * @author m.corchero.blazquez
+ * @version 1.0
+ */
 public class MultiplosDeCinco {
 	public static void main(String[] args) {
 		int num = 0, suma = 0, cont = 4;

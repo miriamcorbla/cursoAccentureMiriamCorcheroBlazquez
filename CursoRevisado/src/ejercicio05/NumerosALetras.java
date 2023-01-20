@@ -1,5 +1,10 @@
 package ejercicio05;
 
+/**
+ * Clase que convierte de numeros a letras
+ * @author m.corchero.blazquez
+ * @version 1.2
+ */
 public class NumerosALetras {
 	//Hacer una clase que convierta de números a letras, definiendo num=72. Podéis hacer una primera version en donde 
 	//los números del 11 al 15 salgan como diez y 
@@ -74,7 +79,8 @@ public class NumerosALetras {
 		String[] parte1 = {"", "uno", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once",
 				"doce", "trece", "ctorce", "quince"};
 		String[] parte2 = {"", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"};
-		int unidades, decenas;
+		int unidades;
+		int decenas;
 		unidades = num % 10;
 		decenas = num / 10;
 		String mensaje= "";
@@ -100,7 +106,7 @@ public class NumerosALetras {
 	
 	
 	public static void main(String[] args) {
-		int num = 90;
+		int num = 22;
 		System.out.println("El numero es: " + convertirVerisonSwitch(num));
 		versionFinal(num);
 	}

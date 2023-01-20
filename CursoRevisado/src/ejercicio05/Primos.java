@@ -1,16 +1,19 @@
 package ejercicio05;
 
+/**
+ * Cálculo de números de primos entre 1 y 100
+ * @author m.corchero.blazquez
+ * @version 1.2
+ */
 public class Primos {
-	//calculo de numeros primos etnre 1 y 100
 	
-	public static Boolean primo (int num) {
+	public static boolean primo (int num) {
 		boolean primo = true;
-		for(int i = 1; i < num; i++) { //compruebo si es divisible por todos los menores que el
+		for(int i = 2; i < num; i++) { //compruebo si es divisible por todos los menores que el
 			if((num % i) == 0) { //cambiar condición, esta no está bien
 				primo = false;
 			}
 		}
-		//System.out.println(num + " es primo?: " + primo);
 		return primo;
 	}
 	

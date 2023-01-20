@@ -2,6 +2,11 @@ package ejercicio01;
 
 import java.time.LocalTime;
 
+/**
+ * Clase Enlace - explicación en clase
+ * @author m.corchero.blazquez
+ *
+ */
 public class Enlace {
 	public String url;
 	public LocalTime hora;

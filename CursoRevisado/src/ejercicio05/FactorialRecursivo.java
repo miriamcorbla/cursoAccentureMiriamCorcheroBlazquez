@@ -1,5 +1,11 @@
 package ejercicio05;
 
+/**
+ * Clase que calcula el factorial de un número
+ * de forma recursiva
+ * @author m.corchero.blazquez
+ * @version 1.0
+ */
 public class FactorialRecursivo {
 	
 	public static int factorial (int num) {

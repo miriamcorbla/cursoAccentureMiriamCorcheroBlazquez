@@ -1,5 +1,13 @@
 package ejercicio04;
 
+/**
+ * Clase operadores que realiza operaciones con variables
+ * declaradas en el método principal. Posteriormente imprime
+ * por pantalla los resultados en el mismo formato
+ * que indica el enunciado del ejercicio
+ * @author m.corchero.blazquez
+ * @version 1.2
+ */
 public class Operadores {
 
 	public static void main(String[] args) {

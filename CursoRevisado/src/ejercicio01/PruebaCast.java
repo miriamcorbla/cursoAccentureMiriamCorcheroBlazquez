@@ -1,5 +1,12 @@
 package ejercicio01;
 
+/**
+ * Clase para el ejercicio de cast. En comentarios
+ * está indicado donde pienso que se perderán datos. 
+ * Posteriormente se imprime por pantalla cada dato.
+ * @author m.corchero.blazquez
+ *
+ */
 public class PruebaCast {
 
 	public static void main(String[] args) {
