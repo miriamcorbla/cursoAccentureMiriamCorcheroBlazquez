@@ -5,8 +5,8 @@ package herencia02.agroalimentaria;
  *
  */
 public class CongeladoNitrogeno extends ProductoCongelado{
-	String metodo;
-	int segundosExposicion;
+	private String metodo;
+	private int segundosExposicion;
 	
 	public String getMetodo() {
 		return metodo;

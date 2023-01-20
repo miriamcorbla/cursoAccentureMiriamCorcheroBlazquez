@@ -12,6 +12,7 @@ public class TestHerencia2 {
 		ProductoRefrigerado prod3 = new ProductoRefrigerado();
 		CongeladoAgua prod4 = new CongeladoAgua();
 		CongeladoAire prod5 = new CongeladoAire();
+		CongeladoNitrogeno prod6 = new CongeladoNitrogeno();
 		
 		//CARGA DE DATOS
 		
@@ -41,11 +42,19 @@ public class TestHerencia2 {
 		prod5.setTemperaturaRecomendada(3);
 		prod5.setVaporAgua(20);
 		
+		//Producto congelado nitrogeno
+		prod6.setFechaCaducidad("04Dic23");
+		prod6.setLote(543);
+		prod6.setMetodo("jhsg");
+		prod6.setSegundosExposicion(1674);
+		prod6.setTemperaturaRecomendada(2);
+		
 		//MUESTRA RESULTADO
 		prod1.mostrar();
 		prod3.mostrar();
 		prod4.mostrar();
 		prod5.mostrar();
+		prod6.mostrar();
 	}
 
 }
