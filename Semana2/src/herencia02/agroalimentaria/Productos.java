@@ -1,6 +1,5 @@
 package herencia02.agroalimentaria;
 
-
 /**
  * Clase padre Productos
  * @author m.corchero.blazquez
@@ -44,6 +43,9 @@ public abstract class Productos {
 	 */
 	protected Productos() {}
 	
+	/**
+	 * Método abstracto a implementar en cada clase según el tipo
+	 */
 	abstract void mostrar();
 	
 
