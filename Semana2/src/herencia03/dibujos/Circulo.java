@@ -18,7 +18,13 @@ public class Circulo extends Figura {
 	 * Método que imprime por pantalla el area del rectángulo
 	 */
 	public void calcularArea() {
-		float result = (float) (Math.PI * Math.pow((getBase()/2), 2));
+		float result;
+		if(getBase() == 0) {
+			result = (float) (Math.PI * Math.pow((getAltura()/2), 2));
+		}else {
+			result = (float) (Math.PI * Math.pow((getBase()/2), 2));
+		}
+		
 		System.out.println("El area del circulo es: " + result);
 	}
 }

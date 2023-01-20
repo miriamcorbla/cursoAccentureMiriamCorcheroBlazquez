@@ -16,7 +16,8 @@ public class TestHerencia3 {
 		rectangulo.setAltura(3);
 		rectangulo.setBase(3);
 		
-		circulo.setBase(5);
+		circulo.setBase(3);
+		circulo.setAltura(0);
 		
 		triangulo.setAltura(3);
 		triangulo.setBase(4);
