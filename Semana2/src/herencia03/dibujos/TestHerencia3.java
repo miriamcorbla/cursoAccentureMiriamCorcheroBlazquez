@@ -9,12 +9,12 @@ package herencia03.dibujos;
 public class TestHerencia3 {
 
 	public static void main(String[] args) {
-		Rectangulo rectangulo = new Rectangulo();
-		Circulo circulo = new Circulo();
-		Triangulo triangulo = new Triangulo();
+		Figura rectangulo = new Rectangulo();
+		Figura circulo = new Circulo();
+		Figura triangulo = new Triangulo();
 		
 		rectangulo.setAltura(3);
-		rectangulo.setBase(2);
+		rectangulo.setBase(3);
 		
 		circulo.setBase(5);
 		
@@ -27,6 +27,7 @@ public class TestHerencia3 {
 		circulo.calcularArea();
 		triangulo.dibujar();
 		triangulo.calcularArea();
+
 	}
 
 }
