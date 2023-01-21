@@ -1,0 +1,6 @@
+Si Coordenada es un objeto con x e y esto devuelve int
+public Coordenada getX() {
+		return x;
+	}
+no Coordenadas.....
+El objeto puede recibir unas Coordenadas como objeto....
