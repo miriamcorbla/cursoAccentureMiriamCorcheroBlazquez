@@ -5,7 +5,7 @@ package interfaces01.automovil;
  * @author m.corchero.blazquez
  *
  */
-public abstract class Automovil {
+public abstract class Automovil implements ABaseDatos {
 	private int numMarchas;
 	private int velocidadMax;
 	private int numChasis;
@@ -73,9 +73,19 @@ public abstract class Automovil {
 		setVelocidadMax(velocidadMax);
 		setNumChasis(numChasis);
 		setNumRuedas(numRuedas);
+		AccesoBBDD dao = new AccesoBBDD();
+		dao.leer(this);
 	}
 	
 	public abstract String anuncio();
+	
+	public void leer() {
+		//convierte sql a dominio
+	}
+	
+	public void grabar () {
+		//Convierte dominio a sql
+	}
 	
 
 }
