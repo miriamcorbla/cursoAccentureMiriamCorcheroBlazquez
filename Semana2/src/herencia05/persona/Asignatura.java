@@ -1,5 +1,10 @@
 package herencia05.persona;
 
+/**
+ * Clase asignatura que contiene los atributos nombre y curso de la misma
+ * @author m.corchero.blazquez
+ *
+ */
 public class Asignatura {
 	
 	private String nombre;

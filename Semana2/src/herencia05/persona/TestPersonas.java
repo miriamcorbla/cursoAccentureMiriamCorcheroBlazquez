@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Clase encargada de las pruebas.
+ * Contiene el método principal.
+ * @author m.corchero.blazquez
+ *
+ */
 public class TestPersonas {
 
 	public static void main(String[] args) {

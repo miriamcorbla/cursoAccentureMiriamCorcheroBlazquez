@@ -3,6 +3,11 @@ package herencia05.persona;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Clase hijo Alumno que hereda de Persona
+ * @author m.corchero.blazquez
+ *
+ */
 public class Alumno extends Persona{
 
 	private int curso;
@@ -26,9 +31,10 @@ public class Alumno extends Persona{
 		setCurso(curso);
 		setAsignaturas(asig);
 	}
+	
 	@Override
 	public String mostrar() {
-		return super.mostrar() + " "+ getCurso() + " " + getAsignaturas().toString();
+		return super.mostrar() + " "+ getCurso() + " " + getAsignaturas().toArray().toString();
 	}
 	
 

@@ -1,5 +1,10 @@
 package herencia05.persona;
 
+/**
+ * Clase hijo Profesor que hereda de Persona
+ * @author m.corchero.blazquez
+ *
+ */
 public class Profesor extends Persona{
 
 	private float salario;
