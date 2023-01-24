@@ -1,4 +1,4 @@
-package banco.clases;
+package banco.pruebas;
 
 import java.time.LocalDate;
 
@@ -34,7 +34,7 @@ public class TestsEjercicioCuentas {
 		credito.pagoEnEstablecimiento("Carrefour", 300);		
 		((Credito) credito).mostrar();
 		System.out.println("\tPost liquidación");
-		System.out.println("********** CUENTA ************");
+		System.out.println("********** Crédito ************");
 		((Credito) credito).liquidar(1, 2023);
 		cuenta.mostrar();
 
