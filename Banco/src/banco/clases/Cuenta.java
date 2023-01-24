@@ -53,7 +53,7 @@ public class Cuenta {
 	 * @param x
 	 * @throws Exception si importe negativo
 	 */
-	public void ingresar(double x) throws Exception {
+	public void ingresar(double x){
 		Movimiento m = new Movimiento();
 		try {
 			if(x > 0) { //si intentas ingresar saldo positivo
@@ -61,7 +61,7 @@ public class Cuenta {
 				addMovimiento(m);
 			}
 		}catch(Exception e) {
-			throw new Exception("El importe debe ser positivo");
+			System.out.println("El importe debe ser positivo");
 		}
 	}
 	/**
@@ -90,7 +90,7 @@ public class Cuenta {
 	public void retirar(double x) throws Exception {
 		Movimiento m = new Movimiento();
 		try {
-			if(getSaldo() > x) { //Si hay saldo suficiente para retirar la cantidad x
+			if(getSaldo() >= x) { //Si hay saldo suficiente para retirar la cantidad x
 				m.setmImporte(-x);
 				addMovimiento(m);
 			}
@@ -107,7 +107,7 @@ public class Cuenta {
 	public void retirar(String concepto, double x) throws Exception {
 		Movimiento m = new Movimiento();
 		try {
-			if(getSaldo() > x) { //si el saldo es mayor que la cantidad a retirar
+			if(getSaldo() >= x) { //si el saldo es mayor que la cantidad a retirar
 				m.setmImporte(-x); //retiramos
 				m.setmConcepto(concepto);
 				addMovimiento(m); //guardamos el movmiento
@@ -115,6 +115,13 @@ public class Cuenta {
 		}catch(Exception e) {
 			throw new Exception("Saldo negativo");
 		}
+	}
+	
+	public void mostrar() {
+		for(Movimiento m : mMovimientos) {
+			System.out.println(m.mostrar());
+		}
+		System.out.println("Saldo total: " + getSaldo());
 	}
 
 }

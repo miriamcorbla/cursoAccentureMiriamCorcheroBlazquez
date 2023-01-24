@@ -10,19 +10,33 @@ public class TestsEjercicioCuentas {
 		Tarjeta credito = new Credito(fechaCaducidad, "0422892", "Miriam");
 		Tarjeta debito = new Debito(fechaCaducidad, "0422895", "Miriam");
 		
-		cuenta.setSaldo(20000);
-		System.out.println("Saldo en cuenta: " + cuenta.getSaldo());
+		credito.setCuenta(cuenta);
+		debito.setCuenta(cuenta);
 		
-		cuenta.ingresar(30);
-		cuenta.ingresar(10);
-		cuenta.retirar(20);
-		cuenta.retirar(50);
+		System.out.println("********** Saldo inicial establecido ************");
+		cuenta.setSaldo(20000);	
+		cuenta.mostrar();
 		
-		credito.ingresar(30);
-		credito.retirar(40);
+		System.out.println("********** Débito ************");
+		debito.ingresar(30);		
+		debito.retirar(30);
+		debito.ingresar(60);
+		debito.pagoEnEstablecimiento("Mercadona", 20);
+		cuenta.mostrar();
 		
-		debito.ingresar(10);
-		debito.retirar(10);
+		
+		System.out.println("********** Crédito ************");
+		((Credito) credito).setCreditoInicial(30000); //Crédito inicial
+		credito.ingresar(1000);
+		credito.ingresar(1000);
+		credito.retirar(500);
+		credito.retirar(500);
+		credito.pagoEnEstablecimiento("Carrefour", 300);		
+		((Credito) credito).mostrar();
+		System.out.println("\tPost liquidación");
+		System.out.println("********** CUENTA ************");
+		((Credito) credito).liquidar(1, 2023);
+		cuenta.mostrar();
 
 	}
 

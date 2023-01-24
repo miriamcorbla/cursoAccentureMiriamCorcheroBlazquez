@@ -23,6 +23,11 @@ public class Credito extends Tarjeta{
 		super(fechaCaducidad, numero, titular);
 	}
 	
+	public void setCreditoInicial(double valor) {
+		if(mMovimientos.isEmpty())
+			mCredito = valor;
+	}
+	
 	/**
 	 * Obtiene el resultado del crédito disponible que 
 	 * hay en la tarjeta. 
@@ -37,11 +42,15 @@ public class Credito extends Tarjeta{
 	}
 	
 	/**
-	 * Obtiene el total de los movimientos de la cuenta
+	 * Obtiene el total de los movimientos del crédito
 	 */
 	@Override
 	public double getSaldo() {
-		return getmCuentaAsociada().getSaldo();
+		double cont = 0d;
+		for(Movimiento m : mMovimientos) {
+			cont += m.getmImporte();
+		}
+		return cont;
 	}
 
 	@Override
@@ -54,7 +63,7 @@ public class Credito extends Tarjeta{
 		mov.setmFecha(LocalDate.now());
 		mov.setmConcepto("Ingreso en cuenta asociada (cajero automatico)");
 		mMovimientos.add(mov); //guardo el movimiento en el array
-		
+		mCredito = mCredito + x;
 	}
 
 	@Override
@@ -63,14 +72,12 @@ public class Credito extends Tarjeta{
 	 * dinero suficiente
 	 */
 	void pagoEnEstablecimiento(String datos, double x) {
-		if(getCreditoDisponible() > x) { //si tengo crédito suficiente
+		if(getSaldo() >= x) { //si tengo crédito suficiente
 			Movimiento m = new Movimiento();
 			m.setmConcepto("Compra a crédito en: " + datos);
 			m.setmImporte(-x);
-			mMovimientos.add(m);
-			mCredito -= x; //Actualiza el total de crédito
-		}else {
-			System.out.println("Crédito insuficiente");
+			this.mMovimientos.add(m);
+			this.mCredito -= x; //Actualiza el total de crédito
 		}
 	}
 
@@ -80,33 +87,39 @@ public class Credito extends Tarjeta{
 	 */
 	void retirar(double x) {
 		Movimiento mov = new Movimiento();
-		if(getCreditoDisponible()>=x) {
-			mov.setmImporte(x);
+		if(getSaldo()>=x) {
+			mov.setmImporte(-x);
 			mov.setmConcepto("Retirada en cuenta asociada (cajero automatico)");
 			double comision = (0.05 * mov.getmImporte());
 			if(comision < 3d) {
 				comision = 3d;
 			}
-			mCredito -= (comision + mov.getmImporte());
-			mMovimientos.add(mov);
-		}else {
-			System.out.println("Crédito insuficiente");
+			this.mCredito = this.mCredito - (comision + mov.getmImporte());
+			this.mMovimientos.add(mov);
 		}
 	}
 	
-	public void liquidar(int mes, int anio) throws Exception {
-		double suma = 0d;
-		for(Movimiento m : mMovimientos) {
+	public void liquidar(int mes, int anio){
+		double total = 0d;
+		for(int i = 0; i<mMovimientos.size(); i++) {
+			Movimiento m = mMovimientos.get(i);
 			if((m.getmFecha().getMonthValue() == mes) && (m.getmFecha().getYear()==anio)) {
-				suma += m.getmImporte();
-				mMovimientos.remove(m); //eliminamos el movimiento del vector movivimientos de Crédito				
+				total += m.getmImporte();
+				this.mMovimientos.remove(i); //eliminamos el movimiento del vector movivimientos de Crédito				
 			}
 		}
 		//Añadimos el movimiento con la suma total al vector de movimientos de la cuenta asociada
 		Movimiento m = new Movimiento();
-		m.setmConcepto("liquidacion");
-		m.setmImporte(suma);
+		m.setmConcepto("Liquidacion de crédito");
+		m.setmImporte(-total);
 		getmCuentaAsociada().addMovimiento(m);
-		getmCuentaAsociada().retirar(suma); //Retiramos el dinero del movimiento en la cuenta asociada
+		//getmCuentaAsociada().retirar(total); //Retiramos el dinero del movimiento en la cuenta asociada
+	}
+	
+	public void mostrar() {
+		for(Movimiento m : mMovimientos) {
+			System.out.println(m.mostrar()); 
+		}
+		System.out.println("Saldo Crédito disponible: " + getSaldo());
 	}
 }

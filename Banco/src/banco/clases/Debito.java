@@ -29,11 +29,7 @@ public class Debito extends Tarjeta{
 	 * Método que recibe un double y se ingresa en cuenta asociada
 	 */
 	void ingresar(double x) {
-		try {
-			getmCuentaAsociada().ingresar("Ingreso en cajero automatico", x);
-		} catch (Exception e) {
-			System.out.println("No se puede ingresar");
-		}		
+		getmCuentaAsociada().ingresar(x);		
 	}
 
 	@Override
@@ -56,5 +52,5 @@ public class Debito extends Tarjeta{
 		} catch (Exception e) {
 			System.out.println("No se puede retirar");
 		}		
-	}		
+	}	
 }
