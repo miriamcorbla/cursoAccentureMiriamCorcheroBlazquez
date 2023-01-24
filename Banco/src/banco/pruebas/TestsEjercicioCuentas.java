@@ -27,13 +27,14 @@ public class TestsEjercicioCuentas {
 		
 		
 		System.out.println("********** Crédito ************");
-		((Credito) credito).setCreditoInicial(30000); //Crédito inicial
-		credito.ingresar(1000);
-		credito.ingresar(1000);
-		credito.retirar(500);
-		credito.retirar(500);
-		credito.pagoEnEstablecimiento("Carrefour", 300);		
+		((Credito) credito).setCreditoInicial(1000); //Crédito inicial
+		credito.ingresar(100);
+		credito.ingresar(300);
+		credito.retirar(50);
+		credito.retirar(40);
+		credito.pagoEnEstablecimiento("Carrefour", 10);		
 		((Credito) credito).mostrar();
+		System.out.println("********** ******* ************");
 		System.out.println("\tPost liquidación");
 		System.out.println("********** Crédito ************");
 		((Credito) credito).liquidar(1, 2023);

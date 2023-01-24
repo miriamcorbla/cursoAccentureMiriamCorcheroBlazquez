@@ -12,6 +12,7 @@ import java.util.Date;
 public class Credito extends Tarjeta{
 	private ArrayList<Movimiento> mMovimientos = new ArrayList<Movimiento>();
 	private double mCredito;
+	private final double COMISION = 3.0; 
 	
 	/**
 	 * Constructor parametrizado de la clase crédito
@@ -28,18 +29,6 @@ public class Credito extends Tarjeta{
 			mCredito = valor;
 	}
 	
-	/**
-	 * Obtiene el resultado del crédito disponible que 
-	 * hay en la tarjeta. 
-	 * @return
-	 */
-	public double getCreditoDisponible() {
-		double cont = 0d;
-		for(Movimiento m : mMovimientos) {
-			cont += m.getmImporte();
-		}
-		return mCredito-cont;
-	}
 	
 	/**
 	 * Obtiene el total de los movimientos del crédito
@@ -52,6 +41,15 @@ public class Credito extends Tarjeta{
 		}
 		return cont;
 	}
+	
+	/**
+	 * Obtiene el resultado del crédito disponible que 
+	 * hay en la tarjeta. 
+	 * @return
+	 */
+	public double getCreditoDisponible() {
+		return mCredito-getSaldo();
+	}
 
 	@Override
 	/**
@@ -63,7 +61,7 @@ public class Credito extends Tarjeta{
 		mov.setmFecha(LocalDate.now());
 		mov.setmConcepto("Ingreso en cuenta asociada (cajero automatico)");
 		mMovimientos.add(mov); //guardo el movimiento en el array
-		mCredito = mCredito + x;
+		//mCredito = mCredito + x;
 	}
 
 	@Override
@@ -72,12 +70,12 @@ public class Credito extends Tarjeta{
 	 * dinero suficiente
 	 */
 	public void pagoEnEstablecimiento(String datos, double x) {
-		if(getSaldo() >= x) { //si tengo crédito suficiente
+		if(getCreditoDisponible() >= x) { //si tengo crédito suficiente
 			Movimiento m = new Movimiento();
 			m.setmConcepto("Compra a crédito en: " + datos);
 			m.setmImporte(-x);
 			this.mMovimientos.add(m);
-			this.mCredito -= x; //Actualiza el total de crédito
+			//this.mCredito -= x; //Actualiza el total de crédito
 		}
 	}
 
@@ -87,14 +85,14 @@ public class Credito extends Tarjeta{
 	 */
 	public void retirar(double x) {
 		Movimiento mov = new Movimiento();
-		if(getSaldo()>=x) {
-			mov.setmImporte(-x);
-			mov.setmConcepto("Retirada en cuenta asociada (cajero automatico)");
-			double comision = (0.05 * mov.getmImporte());
-			if(comision < 3d) {
-				comision = 3d;
+		if(getCreditoDisponible() >= x) {
+			double comisionActual = (0.05 * x);
+			if(comisionActual < COMISION) {
+				comisionActual = COMISION;
 			}
-			this.mCredito = this.mCredito - (comision + mov.getmImporte());
+			//this.mCredito = this.mCredito - (comisionActual + mov.getmImporte());
+			mov.setmImporte(-x-comisionActual);
+			mov.setmConcepto("Retirada en cuenta asociada (cajero automatico)");
 			this.mMovimientos.add(mov);
 		}
 	}
@@ -120,6 +118,6 @@ public class Credito extends Tarjeta{
 		for(Movimiento m : mMovimientos) {
 			System.out.println(m.mostrar()); 
 		}
-		System.out.println("Saldo Crédito disponible: " + getSaldo());
+		System.out.println("Saldo Crédito disponible: " + getCreditoDisponible());
 	}
 }

@@ -29,7 +29,11 @@ public class Debito extends Tarjeta{
 	 * Método que recibe un double y se ingresa en cuenta asociada
 	 */
 	public void ingresar(double x) {
-		getmCuentaAsociada().ingresar(x);		
+		try {
+			getmCuentaAsociada().ingresar(x);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 
 	@Override

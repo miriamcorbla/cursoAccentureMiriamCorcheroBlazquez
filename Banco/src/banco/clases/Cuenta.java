@@ -53,7 +53,7 @@ public class Cuenta {
 	 * @param x
 	 * @throws Exception si importe negativo
 	 */
-	public void ingresar(double x){
+	public void ingresar(double x) throws Exception{
 		Movimiento m = new Movimiento();
 		try {
 			if(x > 0) { //si intentas ingresar saldo positivo
@@ -61,7 +61,7 @@ public class Cuenta {
 				addMovimiento(m);
 			}
 		}catch(Exception e) {
-			System.out.println("El importe debe ser positivo");
+			throw new Exception("El importe debe ser positivo");
 		}
 	}
 	/**
