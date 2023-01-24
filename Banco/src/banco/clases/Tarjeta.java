@@ -48,19 +48,22 @@ public abstract class Tarjeta {
 	/**
 	 * Método abstracto ingresar a implementar en los hijos
 	 * @param x cantidad a ingresar
+	 * @throws Exception 
 	 */
-	abstract public void ingresar(double x);
+	abstract public void ingresar(double x) throws Exception;
 	/**
 	 * Método abstracto que permite pagar en establecimientos
 	 * con una información y cantidad de dinero
 	 * @param datos
 	 * @param x
+	 * @throws Exception 
 	 */
-	abstract public void pagoEnEstablecimiento(String datos, double x);
+	abstract public void pagoEnEstablecimiento(String datos, double x) throws Exception;
 	/**
 	 * Método abstracto a implementar en los hijos que 
 	 * consiste en retirar dinero de la cuenta 
 	 * @param x la cantidad de dinero a retirar
+	 * @throws Exception 
 	 */
-	abstract public void retirar(double x);
+	abstract public void retirar(double x) throws Exception;
 }

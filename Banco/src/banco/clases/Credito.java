@@ -24,22 +24,17 @@ public class Credito extends Tarjeta{
 		super(fechaCaducidad, numero, titular);
 	}
 	
-	public void setCreditoInicial(double valor) {
-		if(mMovimientos.isEmpty())
-			mCredito = valor;
-	}
-	
 	
 	/**
 	 * Obtiene el total de los movimientos del crédito
 	 */
 	@Override
 	public double getSaldo() {
-		double cont = 0d;
+		double suma = 0d;
 		for(Movimiento m : mMovimientos) {
-			cont += m.getmImporte();
+			suma += m.getmImporte();
 		}
-		return cont;
+		return suma;
 	}
 	
 	/**
@@ -48,7 +43,7 @@ public class Credito extends Tarjeta{
 	 * @return
 	 */
 	public double getCreditoDisponible() {
-		return mCredito-getSaldo();
+		return mCredito;
 	}
 
 	@Override
@@ -60,8 +55,8 @@ public class Credito extends Tarjeta{
 		mov.setmImporte(x);
 		mov.setmFecha(LocalDate.now());
 		mov.setmConcepto("Ingreso en cuenta asociada (cajero automatico)");
-		mMovimientos.add(mov); //guardo el movimiento en el array
-		//mCredito = mCredito + x;
+		this.mMovimientos.add(mov); //guardo el movimiento en el array
+		mCredito += x;
 	}
 
 	@Override
@@ -75,7 +70,7 @@ public class Credito extends Tarjeta{
 			m.setmConcepto("Compra a crédito en: " + datos);
 			m.setmImporte(-x);
 			this.mMovimientos.add(m);
-			//this.mCredito -= x; //Actualiza el total de crédito
+			mCredito -= x; //Actualiza el total de crédito
 		}
 	}
 
@@ -90,28 +85,38 @@ public class Credito extends Tarjeta{
 			if(comisionActual < COMISION) {
 				comisionActual = COMISION;
 			}
-			//this.mCredito = this.mCredito - (comisionActual + mov.getmImporte());
+			mCredito = mCredito - (comisionActual + x);
 			mov.setmImporte(-x-comisionActual);
 			mov.setmConcepto("Retirada en cuenta asociada (cajero automatico)");
 			this.mMovimientos.add(mov);
 		}
 	}
 	
+	/**
+	 * Summa todos los importes del mes indicado, los elimina
+	 * de movimientos de tarjeta y añade el mov a cuenta asociada
+	 * @param mes
+	 * @param anio
+	 */
 	public void liquidar(int mes, int anio){
 		double total = 0d;
 		for(int i = 0; i<mMovimientos.size(); i++) {
 			Movimiento m = mMovimientos.get(i);
+			System.out.println("Importe fuera for " + m.getmImporte());
 			if((m.getmFecha().getMonthValue() == mes) && (m.getmFecha().getYear()==anio)) {
+				System.out.println("Importe dentro for " + m.getmImporte());
 				total += m.getmImporte();
-				this.mMovimientos.remove(i); //eliminamos el movimiento del vector movivimientos de Crédito				
+				this.mMovimientos.remove(i);//eliminamos el movimiento del vector movivimientos de Crédito				
+				i--; //restauramos el indice ya que eliminamos un movimiento
 			}
+			
 		}
+		System.out.println(total);
 		//Añadimos el movimiento con la suma total al vector de movimientos de la cuenta asociada
 		Movimiento m = new Movimiento();
 		m.setmConcepto("Liquidacion de crédito");
 		m.setmImporte(-total);
 		getmCuentaAsociada().addMovimiento(m);
-		//getmCuentaAsociada().retirar(total); //Retiramos el dinero del movimiento en la cuenta asociada
 	}
 	
 	public void mostrar() {
