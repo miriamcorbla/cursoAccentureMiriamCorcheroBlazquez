@@ -1,4 +1,5 @@
 package banco.pruebas;
+import banco.clases.*;
 
 import java.time.LocalDate;
 

@@ -28,7 +28,7 @@ public class Debito extends Tarjeta{
 	/**
 	 * Método que recibe un double y se ingresa en cuenta asociada
 	 */
-	void ingresar(double x) {
+	public void ingresar(double x) {
 		getmCuentaAsociada().ingresar(x);		
 	}
 
@@ -37,7 +37,7 @@ public class Debito extends Tarjeta{
 	 * Método que paga en establecimientos con el concepto
 	 * Compras en + el nombre del comercio
 	 */
-	void pagoEnEstablecimiento(String datos, double x) {
+	public void pagoEnEstablecimiento(String datos, double x) {
 		try {
 			getmCuentaAsociada().retirar("Compras en : " + datos, x);
 		} catch (Exception e) {
@@ -46,7 +46,7 @@ public class Debito extends Tarjeta{
 	}
 
 	@Override
-	void retirar(double x) {
+	public void retirar(double x) {
 		try {
 			getmCuentaAsociada().retirar("Retirada en cajero automático", x);
 		} catch (Exception e) {

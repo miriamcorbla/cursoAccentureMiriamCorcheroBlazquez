@@ -44,23 +44,23 @@ public abstract class Tarjeta {
 	 * Método abstracto que devuelve el saldo asociado a la cuenta
 	 * @return el saldo
 	 */
-	abstract double getSaldo();
+	abstract public double getSaldo();
 	/**
 	 * Método abstracto ingresar a implementar en los hijos
 	 * @param x cantidad a ingresar
 	 */
-	abstract void ingresar(double x);
+	abstract public void ingresar(double x);
 	/**
 	 * Método abstracto que permite pagar en establecimientos
 	 * con una información y cantidad de dinero
 	 * @param datos
 	 * @param x
 	 */
-	abstract void pagoEnEstablecimiento(String datos, double x);
+	abstract public void pagoEnEstablecimiento(String datos, double x);
 	/**
 	 * Método abstracto a implementar en los hijos que 
 	 * consiste en retirar dinero de la cuenta 
 	 * @param x la cantidad de dinero a retirar
 	 */
-	abstract void retirar(double x);
+	abstract public void retirar(double x);
 }

@@ -57,7 +57,7 @@ public class Credito extends Tarjeta{
 	/**
 	 * Ingresa dinero en la cuenta crédito
 	 */
-	void ingresar(double x) {
+	public void ingresar(double x) {
 		Movimiento mov = new Movimiento(); //creo nuevo movimiento
 		mov.setmImporte(x);
 		mov.setmFecha(LocalDate.now());
@@ -71,7 +71,7 @@ public class Credito extends Tarjeta{
 	 * Paga con tarjeta crédito, si tiene
 	 * dinero suficiente
 	 */
-	void pagoEnEstablecimiento(String datos, double x) {
+	public void pagoEnEstablecimiento(String datos, double x) {
 		if(getSaldo() >= x) { //si tengo crédito suficiente
 			Movimiento m = new Movimiento();
 			m.setmConcepto("Compra a crédito en: " + datos);
@@ -85,7 +85,7 @@ public class Credito extends Tarjeta{
 	/**
 	 * Retira en la cuenta crédito asociada con una retención
 	 */
-	void retirar(double x) {
+	public void retirar(double x) {
 		Movimiento mov = new Movimiento();
 		if(getSaldo()>=x) {
 			mov.setmImporte(-x);
