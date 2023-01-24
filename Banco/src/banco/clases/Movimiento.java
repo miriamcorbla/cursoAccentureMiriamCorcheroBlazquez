@@ -55,5 +55,16 @@ public class Movimiento {
 	public void setmImporte(double mImporte) {
 		this.mImporte = mImporte;
 	}
+	
+	/**
+	 * Constructor de clase
+	 */
+	public Movimiento() {
+		setmFecha(LocalDate.now());
+	}
+	
+	public String mostrar() {
+		return "Fecha: " + getmFecha() + " Concepto: " + getmConcepto() + " Importe: " + getmImporte();
+	}
 
 }
