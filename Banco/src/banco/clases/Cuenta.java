@@ -2,6 +2,7 @@ package banco.clases;
 
 import java.util.ArrayList;
 
+import banco.util.ErrorFiltro;
 import banco.util.Filtros;
 
 /**
@@ -20,12 +21,12 @@ public class Cuenta {
 	 * @param titular
 	 * @throws Exception 
 	 */
-	public Cuenta(String numero, String titular) throws Exception {
+	public Cuenta(String numero, String titular) throws ErrorFiltro {
 		mNumero = numero;
-		if(Filtros.filtroTexto(titular, 20, 30)) {
+		if(Filtros.filtroTexto(titular, 30, 20)) {
 			mTitular = titular;
 		}else {
-			throw new Exception("Error tamaño nombre");
+			throw new ErrorFiltro("Error tamaño nombre");
 		}
 	}
 	/**
@@ -60,7 +61,7 @@ public class Cuenta {
 	 * @param x
 	 * @throws Exception si importe negativo
 	 */
-	public void ingresar(double x) throws Exception{
+	public void ingresar(double x) throws ErrorFiltro{
 		Movimiento m = new Movimiento();
 		try {
 			if(x > 0) { //si intentas ingresar saldo positivo
@@ -68,7 +69,7 @@ public class Cuenta {
 				addMovimiento(m);
 			}
 		}catch(Exception e) {
-			throw new Exception("El importe debe ser positivo");
+			throw new ErrorFiltro("El importe debe ser positivo");
 		}
 	}
 	/**
@@ -77,7 +78,7 @@ public class Cuenta {
 	 * @param x si importe negativo
 	 * @throws Exception
 	 */
-	public void ingresar(String concepto, double x) throws Exception {
+	public void ingresar(String concepto, double x) throws ErrorFiltro {
 		Movimiento m = new Movimiento();
 		try {
 			if(x > 0) { //Se puede ingresar si el valor es positivo
@@ -86,7 +87,7 @@ public class Cuenta {
 				addMovimiento(m);
 			}
 		}catch(Exception e) {
-			throw new Exception("El importe debe ser positivo");
+			throw new ErrorFiltro("El importe debe ser positivo");
 		}
 	}
 	/**
@@ -94,7 +95,7 @@ public class Cuenta {
 	 * @param x 
 	 * @throws Exception si saldo negativo
 	 */
-	public void retirar(double x) throws Exception {
+	public void retirar(double x) throws ErrorFiltro {
 		Movimiento m = new Movimiento();
 		try {
 			if(getSaldo() >= x) { //Si hay saldo suficiente para retirar la cantidad x
@@ -102,7 +103,7 @@ public class Cuenta {
 				addMovimiento(m);
 			}
 		}catch(Exception e) {
-			throw new Exception("Saldo insuficiente para retirar");
+			throw new ErrorFiltro("Saldo insuficiente para retirar");
 		}
 	}
 	/**
@@ -111,7 +112,7 @@ public class Cuenta {
 	 * @param x
 	 * @throws Exception si saldo negativo
 	 */
-	public void retirar(String concepto, double x) throws Exception {
+	public void retirar(String concepto, double x) throws ErrorFiltro {
 		Movimiento m = new Movimiento();
 		try {
 			if(getSaldo() >= x) { //si el saldo es mayor que la cantidad a retirar
@@ -120,7 +121,7 @@ public class Cuenta {
 				addMovimiento(m); //guardamos el movmiento
 			}
 		}catch(Exception e) {
-			throw new Exception("Saldo negativo");
+			throw new ErrorFiltro("Saldo negativo");
 		}
 	}
 	
