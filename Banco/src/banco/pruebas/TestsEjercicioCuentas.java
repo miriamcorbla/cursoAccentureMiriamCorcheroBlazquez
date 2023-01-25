@@ -8,7 +8,7 @@ public class TestsEjercicioCuentas {
 	public static void main(String[] args) throws Exception {
 		Cuenta cuenta = new Cuenta("0029371", "Miriam");
 		LocalDate fechaCaducidad = LocalDate.of(2025, 11, 25);
-		Tarjeta credito = new Credito(fechaCaducidad, "0422892", "Miriam");
+		Tarjeta credito = new Credito(fechaCaducidad, "0422892", "Miriam", 1000);
 		Tarjeta debito = new Debito(fechaCaducidad, "0422895", "Miriam");
 		
 		credito.setCuenta(cuenta);
@@ -27,8 +27,8 @@ public class TestsEjercicioCuentas {
 		
 		
 		System.out.println("********** Crédito ************");
-		credito.ingresar(1000);
-		credito.ingresar(300);
+		System.out.println("Credito disponible: " + ((Credito) credito).getCreditoDisponible());
+		credito.ingresar(100);
 		credito.retirar(50);
 		credito.retirar(40);
 		credito.pagoEnEstablecimiento("Carrefour", 10);		

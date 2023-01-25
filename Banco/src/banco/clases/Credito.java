@@ -20,8 +20,9 @@ public class Credito extends Tarjeta{
 	 * @param numero
 	 * @param titular
 	 */
-	public Credito(LocalDate fechaCaducidad, String numero, String titular) {
+	public Credito(LocalDate fechaCaducidad, String numero, String titular, double mCredito) {
 		super(fechaCaducidad, numero, titular);
+		this.mCredito = mCredito;
 	}
 	
 	
@@ -102,16 +103,13 @@ public class Credito extends Tarjeta{
 		double total = 0d;
 		for(int i = 0; i<mMovimientos.size(); i++) {
 			Movimiento m = mMovimientos.get(i);
-			System.out.println("Importe fuera for " + m.getmImporte());
 			if((m.getmFecha().getMonthValue() == mes) && (m.getmFecha().getYear()==anio)) {
-				System.out.println("Importe dentro for " + m.getmImporte());
 				total += m.getmImporte();
 				this.mMovimientos.remove(i);//eliminamos el movimiento del vector movivimientos de Crédito				
 				i--; //restauramos el indice ya que eliminamos un movimiento
 			}
 			
 		}
-		System.out.println(total);
 		//Añadimos el movimiento con la suma total al vector de movimientos de la cuenta asociada
 		Movimiento m = new Movimiento();
 		m.setmConcepto("Liquidacion de crédito");

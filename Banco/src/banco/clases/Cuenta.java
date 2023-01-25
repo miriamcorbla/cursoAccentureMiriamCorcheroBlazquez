@@ -2,6 +2,8 @@ package banco.clases;
 
 import java.util.ArrayList;
 
+import banco.util.Filtros;
+
 /**
  * Clase cuenta
  * @author m.corchero.blazquez
@@ -16,10 +18,15 @@ public class Cuenta {
 	 * Constructor parametrizado
 	 * @param numero
 	 * @param titular
+	 * @throws Exception 
 	 */
-	public Cuenta(String numero, String titular) {
+	public Cuenta(String numero, String titular) throws Exception {
 		mNumero = numero;
-		mTitular = titular;
+		if(Filtros.filtroTexto(titular, 20, 30)) {
+			mTitular = titular;
+		}else {
+			throw new Exception("Error tamaño nombre");
+		}
 	}
 	/**
 	 * Añade un movimiento
