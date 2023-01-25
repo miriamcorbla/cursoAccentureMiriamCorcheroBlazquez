@@ -63,12 +63,10 @@ public class Cuenta {
 	 */
 	public void ingresar(double x) throws ErrorFiltro{
 		Movimiento m = new Movimiento();
-		try {
-			if(x > 0) { //si intentas ingresar saldo positivo
-				m.setmImporte(x);
-				addMovimiento(m);
-			}
-		}catch(Exception e) {
+		if(x > 0) { //si intentas ingresar saldo positivo
+			m.setmImporte(x);
+			addMovimiento(m);
+		}else {
 			throw new ErrorFiltro("El importe debe ser positivo");
 		}
 	}
@@ -80,13 +78,11 @@ public class Cuenta {
 	 */
 	public void ingresar(String concepto, double x) throws ErrorFiltro {
 		Movimiento m = new Movimiento();
-		try {
-			if(x > 0) { //Se puede ingresar si el valor es positivo
-				m.setmImporte(x);
-				m.setmConcepto(concepto);
-				addMovimiento(m);
-			}
-		}catch(Exception e) {
+		if(x > 0) { //Se puede ingresar si el valor es positivo
+			m.setmImporte(x);
+			m.setmConcepto(concepto);
+			addMovimiento(m);
+		}else {
 			throw new ErrorFiltro("El importe debe ser positivo");
 		}
 	}
@@ -97,12 +93,10 @@ public class Cuenta {
 	 */
 	public void retirar(double x) throws ErrorFiltro {
 		Movimiento m = new Movimiento();
-		try {
-			if(getSaldo() >= x) { //Si hay saldo suficiente para retirar la cantidad x
-				m.setmImporte(-x);
-				addMovimiento(m);
-			}
-		}catch(Exception e) {
+		if(getSaldo() >= x) { //Si hay saldo suficiente para retirar la cantidad x
+			m.setmImporte(-x);
+			addMovimiento(m);
+		}else {
 			throw new ErrorFiltro("Saldo insuficiente para retirar");
 		}
 	}
@@ -114,14 +108,12 @@ public class Cuenta {
 	 */
 	public void retirar(String concepto, double x) throws ErrorFiltro {
 		Movimiento m = new Movimiento();
-		try {
-			if(getSaldo() >= x) { //si el saldo es mayor que la cantidad a retirar
-				m.setmImporte(-x); //retiramos
-				m.setmConcepto(concepto);
-				addMovimiento(m); //guardamos el movmiento
-			}
-		}catch(Exception e) {
-			throw new ErrorFiltro("Saldo negativo");
+		if(getSaldo() >= x) { //si el saldo es mayor que la cantidad a retirar
+			m.setmImporte(-x); //retiramos
+			m.setmConcepto(concepto);
+			addMovimiento(m); //guardamos el movmiento
+		}else {
+			throw new ErrorFiltro("Saldo Negativo");
 		}
 	}
 	

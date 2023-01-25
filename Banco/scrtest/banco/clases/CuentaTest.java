@@ -94,7 +94,7 @@ class CuentaTest {
 	}
 	
 	/**
-	 * Quiero retirar más de lo que hay ingresado
+	 * Quiero retirar más de lo que hay en la cuenta
 	 */
 	@Test
 	void testRetirarDoubleExceso() throws ErrorFiltro {
