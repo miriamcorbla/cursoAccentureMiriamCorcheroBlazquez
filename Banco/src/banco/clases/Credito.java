@@ -2,7 +2,9 @@ package banco.clases;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 /**
  * Clase crédito
@@ -115,6 +117,25 @@ public class Credito extends Tarjeta{
 		m.setmConcepto("Liquidacion de crédito");
 		m.setmImporte(-total);
 		getmCuentaAsociada().addMovimiento(m);
+	}
+	
+	//Tenemos que hacer dos pasadas:
+	//una para calcular el total y otra para borrar los elementos
+	public void liquidarStream(int mes, int anio) {
+		double totalSuma = mMovimientos.stream()
+				.filter(mov -> mov.getmFecha().getMonthValue() == mes && mov.getmFecha().getYear() == anio)
+				.collect(Collectors.summingDouble(Movimiento::getmImporte));
+
+		mMovimientos.stream()
+			.filter(mov -> mov.getmFecha().getMonthValue() == mes && mov.getmFecha().getYear() == anio)
+			.collect(Collectors.toList());
+		
+		//Añadimos el movimiento con la suma total al vector de movimientos de la cuenta asociada
+		Movimiento m = new Movimiento();
+		m.setmConcepto("Liquidacion de crédito");
+		m.setmImporte(-totalSuma);
+		getmCuentaAsociada().addMovimiento(m);
+		
 	}
 	
 	public void mostrar() {
