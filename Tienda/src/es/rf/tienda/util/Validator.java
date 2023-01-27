@@ -77,9 +77,8 @@ public class Validator {
 		return esAlfanumerico; //devuelvo true si es alfanumerico, o false si no lo es
 	}
 	
-	/* NO IMPLEMENTAR */
 	public static boolean isVacio( String prueba ){
-		return prueba.chars().count() == 0;
+		return prueba.isEmpty();
 	}
 	
 	/**
@@ -146,7 +145,7 @@ public class Validator {
 	public static boolean cumpleDNI(String dni){
 		Pattern patron = Pattern.compile(DNI_PATTERN); //no sé si este patron permite esto: -_ COMPROBAR EN JUNIT
 		Matcher dniPatron = patron.matcher(dni); //cumple el patron?
-		boolean dniLongitud = dni.chars().count() == LONGITUD_DNI;
+		boolean dniLongitud = dni.length() == LONGITUD_DNI;
 		return dniPatron.find() && dniLongitud;
 	}
 	
@@ -202,8 +201,7 @@ public class Validator {
 	public static boolean cumpleLongitudMin(
 			String texto, 
 			int longitudMinima){
-		long longitudTexto = texto.chars().count(); //cuento los caracteres del String
-		return (longitudTexto >= longitudMinima); //dev. directamente el resultado de la comprobación
+		return (texto.length() >= longitudMinima); //dev. directamente el resultado de la comprobación
 	}
 
 
@@ -226,8 +224,7 @@ public class Validator {
 	public static boolean cumpleLongitudMax(
 			String texto, 
 			int longitudMaxima){
-		long longitudTexto = texto.chars().count(); //cuento los caracteres del String
-		return (longitudTexto <= longitudMaxima);
+		return (texto.length() <= longitudMaxima);
 	}
 
 	/**
@@ -251,8 +248,7 @@ public class Validator {
 			String texto, 
 			int longitudMinima, 
 			int longitudMaxima){
-		long longitudTexto = texto.chars().count(); //cuento los caracteres del String
-		return ((longitudTexto>=longitudMinima) && (longitudTexto<=longitudMaxima));
+		return ((texto.length()>=longitudMinima) && (texto.length()<=longitudMaxima));
 	}
 	
 	/**
@@ -290,7 +286,7 @@ public class Validator {
 	public static boolean esFechaValida(String fecha){
 		DateTimeFormatter miFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //Creo un Formatter con el formato que me pasan
 		LocalDate miFecha = LocalDate.parse(fecha, miFormato); //me creo la fecha con el formato
-		return fecha.equals(miFecha.toString()); //comrpueba si la fecha sigue el patron de fecha
+		return !isVacio(fecha) && fecha.equals(miFecha.toString()); //comrpueba si la fecha sigue el patron de fecha
 	}
 	
 	/**
