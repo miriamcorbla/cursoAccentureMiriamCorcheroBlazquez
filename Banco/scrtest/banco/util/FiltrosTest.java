@@ -20,6 +20,10 @@ class FiltrosTest {
 	final static LocalDate FECHA3 = LocalDate.of(2026, 10, 5);
 	final static LocalDate FECHA4 = LocalDate.of(2025, 8, 7);
 	final static LocalDate FECHA5 = null;
+	final static String FECHACORRECTADEFECTO = "30-01-22";
+	final static String FECHACORRECTABARRAS = "30/01/22";
+	final static String FECHAINCORRECTA =  "30.01.22";
+	final static String FECHAINCORRECTA2 = "estoNoEsUnFormato";
 	
 	/**
 	 * Vamos a comprobar que el titular de 21 no es correcto
@@ -106,5 +110,19 @@ class FiltrosTest {
 	void testFiltroFechaNula() {
 		assertFalse(Filtros.filtroFechaAnio(FECHA5, ANIOMAX, ANIOMIN));
 	}
+	
+	/**
+	 * Test para formato. AUN POR TERMINAR!!!!
+	 */
+	@Test
+	void testFiltroFormatoFechaPorDefecto() {
+		assertEquals(FECHACORRECTADEFECTO, Filtros.fechaFormatoCorrecto(FECHACORRECTADEFECTO));
+	}
+	
+	@Test
+	void testFiltroFormatoFechaBarras() {
+		assertEquals(FECHACORRECTABARRAS, Filtros.fechaFormatoCorrecto(FECHACORRECTABARRAS, "dd/mm/yyyy"));
+	}
+	
 
 }

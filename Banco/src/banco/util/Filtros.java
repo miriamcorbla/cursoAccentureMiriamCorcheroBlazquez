@@ -1,6 +1,8 @@
 package banco.util;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Conjunto de métodos para filtrar datos
@@ -28,4 +30,25 @@ public class Filtros {
 			return false;
 		}			
 	}
+	
+	/**
+	 * Filtro de formato de fecha. Recibe una fecha y el formato, y pasa
+	 * la fecha al formato indicado
+	 */
+	
+	public static LocalDate fechaFormatoCorrecto(String fecha, String formato) {
+		DateTimeFormatter miFormato = DateTimeFormatter.ofPattern(formato); //Creo un Formatter con el formato que me pasan
+		LocalDate miFecha = null;
+		try {
+			miFecha = LocalDate.parse(fecha, miFormato); //miFecha tiene el resultado de la fecha que me pasan con el formato
+			return miFecha; //devuelvo la fecha. Si no puedo realizar este bloque devolverá nulo
+		}catch(DateTimeParseException dte) {}
+		return miFecha;
+	}
+	
+	
+	public static LocalDate fechaFormatoCorrecto(String fecha) {
+		return fechaFormatoCorrecto(fecha, "dd-mm-yyyy");
+	}
+
 }
