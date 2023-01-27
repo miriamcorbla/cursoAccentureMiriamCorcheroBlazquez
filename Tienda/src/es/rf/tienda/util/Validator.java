@@ -78,7 +78,7 @@ public class Validator {
 	}
 	
 	public static boolean isVacio( String prueba ){
-		return prueba.isEmpty();
+		return prueba == null || prueba.isEmpty();
 	}
 	
 	/**
