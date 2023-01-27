@@ -143,10 +143,7 @@ public class Validator {
 	 * 
 	 * **************************************************************************************/
 	public static boolean cumpleDNI(String dni){
-		Pattern patron = Pattern.compile(DNI_PATTERN); //no sé si este patron permite esto: -_ COMPROBAR EN JUNIT
-		Matcher dniPatron = patron.matcher(dni); //cumple el patron?
-		boolean dniLongitud = dni.length() == LONGITUD_DNI;
-		return dniPatron.find() && dniLongitud;
+		return !isVacio(dni) && dni.matches(DNI_PATTERN) && (dni.length() == LONGITUD_DNI);
 	}
 	
 

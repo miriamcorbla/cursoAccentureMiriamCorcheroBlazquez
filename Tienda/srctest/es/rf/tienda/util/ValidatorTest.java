@@ -17,6 +17,28 @@ class ValidatorTest {
 	static final String TELEFONO_VACIO = "";
 	static final String TELEFONO_NULO = null;
 
+	static final String EMAIL_ACABAEN2 = "mmm_@gmail.es";
+	static final String EMAIL_ACABAEN3 = "mmm_mm@gmail.com";
+	static final String EMAIL_ACABA_ERROR = "mmmmmm@gmail.c";
+	static final String EMAIL_ERROR = "*mmm@gmail.com";
+	static final String EMAIL_ERROR1 = "mmmmm@gmai*.com";
+	static final String EMAIL_GUIONES = "mmm-m@gmail.com";
+	static final String EMAIL_VACIO = "";
+	static final String EMAIL_NULO = null;
+	
+	static final String DNI = "11.111.111-A";
+	static final String DNI_ERROR = "111.11.111-A";
+	static final String DNI_ERROR_LONGITUD = "1111.111.1111-A";
+	static final String DNI_ERROR_LETRA = "11.111.111-1";
+	static final String DNI_VACIO = "";
+	static final String DNI_NULO = null;
+	
+	static final int VALOR = 3;
+	static final int VALOR_MAX = 10;
+	static final int VALOR_MIN = 1;
+	static final int VALOR_ERRORMAX = 20;
+	static final int VALOR_ERRORMIN = -8;
+	
 	/**
 	 * Comprueba validación de cadena correcta
 	 */
@@ -34,7 +56,7 @@ class ValidatorTest {
 	}
 
 	/**
-	 * Comrpueba validacion de método isVacio con texto
+	 * Comprueba validacion de método isVacio con texto
 	 */
 	@Test
 	void testIsVacio() {
@@ -57,19 +79,113 @@ class ValidatorTest {
 	}
 
 	@Test
-	void testIsEmailValido() {
-		fail("Not yet implemented");
+	void testCumplePhoneNumberNulo() {
+		assertFalse(Validator.cumplePhoneNumber(TELEFONO_NULO));
+	}
+
+	@Test
+	void testCumplePhoneNumberVacio() {
+		assertFalse(Validator.cumplePhoneNumber(TELEFONO_VACIO));
+	}
+	
+	@Test
+	void testCumplePhoneNumberDigitos() {
+		assertFalse(Validator.cumplePhoneNumber(TELEFONO_ERROR_MINDIGITOS));
+	}
+
+	@Test
+	void testCumplePhoneNumberCaracteres() {
+		assertFalse(Validator.cumplePhoneNumber(TELEFONO_ERROR_MINCARACTERES));
+	}
+
+	@Test
+	void testIsEmailValidoEn2() {
+		assertTrue(Validator.isEmailValido(EMAIL_ACABAEN2));
+	}
+	
+	@Test
+	void testIsEmailValidoEn3() {
+		assertTrue(Validator.isEmailValido(EMAIL_ACABAEN3));
+	}
+	
+	@Test
+	void testIsEmailValidoGuiones() {
+		assertTrue(Validator.isEmailValido(EMAIL_GUIONES));
+	}
+	
+	@Test
+	void testIsEmailValidoError() {
+		assertFalse(Validator.isEmailValido(EMAIL_ERROR));
+	}
+	@Test
+	void testIsEmailValidoError1() {
+		assertFalse(Validator.isEmailValido(EMAIL_ERROR1));
+	}
+	@Test
+	void testIsEmailValidoNulo() {
+		assertFalse(Validator.isEmailValido(EMAIL_NULO));
+	}
+	@Test
+	void testIsEmailValidoVacio() {
+		assertFalse(Validator.isEmailValido(EMAIL_VACIO));
 	}
 
 	@Test
 	void testCumpleDNI() {
-		fail("Not yet implemented");
+		assertTrue(Validator.cumpleDNI(DNI));
 	}
+	
+	@Test
+	void testCumpleDNIError() {
+		assertFalse(Validator.cumpleDNI(DNI_ERROR));
+	}
+	
+	@Test
+	void testCumpleDNIErrorLetraFinal() {
+		assertFalse(Validator.cumpleDNI(DNI_ERROR_LETRA));
+	}
+	
+	@Test
+	void testCumpleDNIErrorLongitud() {
+		assertFalse(Validator.cumpleDNI(DNI_ERROR_LONGITUD));
+	}
+	
+	@Test
+	void testCumpleDNIVacio() {
+		assertFalse(Validator.cumpleDNI(DNI_VACIO));
+	}
+	
+	@Test
+	void testCumpleDNINulo() {
+		assertFalse(Validator.cumpleDNI(DNI_NULO));
+	}
+
 
 	@Test
 	void testCumpleRangoIntIntInt() {
-		fail("Not yet implemented");
+		assertTrue(Validator.cumpleRango(VALOR, VALOR_MIN, VALOR_MAX));
 	}
+	
+	@Test
+	void testCumpleRangoIntIntIntValorMin() {
+		assertTrue(Validator.cumpleRango(VALOR_MIN, VALOR_MIN, VALOR_MAX));
+	}
+	
+	@Test
+	void testCumpleRangoIntIntIntValorMax() {
+		assertTrue(Validator.cumpleRango(VALOR_MAX, VALOR_MIN, VALOR_MAX));
+	}
+	
+	@Test
+	void testCumpleRangoIntIntIntValorErrorMin() {
+		assertFalse(Validator.cumpleRango(VALOR_ERRORMIN, VALOR_MIN, VALOR_MAX));
+	}
+	
+	@Test
+	void testCumpleRangoIntIntIntValorErrorMax() {
+		assertFalse(Validator.cumpleRango(VALOR_ERRORMAX, VALOR_MIN, VALOR_MAX));
+	}
+
 
 	@Test
 	void testCumpleRangoDoubleIntInt() {
