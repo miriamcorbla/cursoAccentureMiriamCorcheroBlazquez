@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author m.corchero.blazquez
  *
  */
-public class LecturaFichero {
+public class LecturaFicheroNombreApellido {
 
 	public static void main(String[] args) {
 		File ficheroALeer = null;
