@@ -14,11 +14,12 @@ import java.io.IOException;
 public class LecturaFicheroNombreApellido {
 
 	public static void main(String[] args) {
-		File ficheroALeer = null;
+		File ficheroALeer = null; //fichero que leeremos
 		FileReader leyendo = null;
-		StringBuilder cadenaFinal = new StringBuilder();
+		StringBuilder cadenaFinal = new StringBuilder(); //String donde guardar todo lo que contiene el fichero y mostrarlo por pantalla
 		BufferedReader buffer = null;
 		
+		//Ubicación del fichero a leer
 		ficheroALeer = new File("C:\\Users\\m.corchero.blazquez\\OneDrive - Accenture\\cursoWorkspace\\Semana3\\src\\entradasalida04\\nombreapellidosscannerficheros\\FicheroGrabarNombreApellido.txt");
 		try {
 			leyendo = new FileReader(ficheroALeer);
@@ -26,10 +27,10 @@ public class LecturaFicheroNombreApellido {
 			
 			String nombreapellidos;
 			try {
-				while ((nombreapellidos = buffer.readLine()) != null) {
-					cadenaFinal.append(nombreapellidos + " ");
+				while ((nombreapellidos = buffer.readLine()) != null) { //iteramos liena a linea sobre el fichero a leer
+					cadenaFinal.append(nombreapellidos + " "); //lo añadimos a la cadena que devolveremos al final
 				}
-				System.out.println(cadenaFinal);
+				System.out.println(cadenaFinal); //mostramos resultado
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

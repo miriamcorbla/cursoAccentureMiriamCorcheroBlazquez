@@ -15,20 +15,21 @@ public class EscrituraNombreApellido {
 
 	public static void main(String[] args) {
 		try (Scanner sc = new Scanner(System.in)) {
-			String nombre;
-			String apellido;
-			FileWriter fichero = null;
+			String nombre; //almacenaremos el nombre
+			String apellido; //almacenaremos el apellido
+			FileWriter fichero = null; //usaremos fichero y escribir para poder escribir en el fichero
 			PrintWriter escribir = null;
 			
 			System.out.println("Introduzca el nombre");
-			nombre = sc.next();
+			nombre = sc.next(); //guardamos el nombre introducido
 			System.out.println("Introduzca el apellido");
 			apellido = sc.next();
 			
 			try {
+				//ruta del fichero donde escribir
 				fichero = new FileWriter("C:\\Users\\m.corchero.blazquez\\OneDrive - Accenture\\cursoWorkspace\\Semana3\\src\\entradasalida04\\nombreapellidosscannerficheros\\FicheroGrabarNombreApellido.txt");
 				escribir = new PrintWriter(fichero);
-				escribir.println(nombre);
+				escribir.println(nombre); //escribimos
 				escribir.println(apellido);
 			} catch (IOException e) {
 				e.printStackTrace();
