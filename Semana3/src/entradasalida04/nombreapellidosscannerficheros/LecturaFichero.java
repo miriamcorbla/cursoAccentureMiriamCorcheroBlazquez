@@ -24,10 +24,9 @@ public class LecturaFichero {
 			leyendo = new FileReader(ficheroALeer);
 			buffer = new BufferedReader(leyendo);
 			
-			 // Lectura del fichero
-	         String nombreapellidos;
-	         try {
-				while((nombreapellidos=buffer.readLine())!=null) {
+			String nombreapellidos;
+			try {
+				while ((nombreapellidos = buffer.readLine()) != null) {
 					cadenaFinal.append(nombreapellidos + " ");
 				}
 				System.out.println(cadenaFinal);
