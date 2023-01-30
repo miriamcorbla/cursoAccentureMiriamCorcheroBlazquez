@@ -245,7 +245,7 @@ public class Validator {
 			String texto, 
 			int longitudMinima, 
 			int longitudMaxima){
-		return ((texto.length()>=longitudMinima) && (texto.length()<=longitudMaxima));
+		return cumpleLongitudMin(texto, longitudMinima) && cumpleLongitudMax(texto, longitudMaxima);
 	}
 	
 	/**
