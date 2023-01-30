@@ -6,6 +6,14 @@ import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
 	
+	static final String CODIGO_OK = "PR332";
+	static final String CODIGO_ERROR = "332PR";
+	static final String CODIGO_ERROR_SOLONUMEROS = "32323";
+	static final String CODIGO_ERROR_LONGITUD = "PR3332";
+	static final String CODIGO_ERROR_MINUSCULA = "pr332";
+	static final String CODIGO_VACIO = "";
+	static final String CODIGO_NULO = null;
+	
 	static final String TEXTO_ALFANUMERICO = "ESTOES1TEXTO";
 	static final String TEXTO_ALFANUMERICO_ESPECIAL = "*23Es-%%";
 	static final String TEXTO_VACIO = "";
@@ -38,6 +46,63 @@ class ValidatorTest {
 	static final int VALOR_MIN = 1;
 	static final int VALOR_ERRORMAX = 20;
 	static final int VALOR_ERRORMIN = -8;
+	
+	/**
+	 * Comprueba validación de codigo de producto siendo este
+	 * solo de numeros y cumpliendo la longitud
+	 */
+	@Test
+	void testcumpleCodigoProductoSoloNumeros() {
+		assertFalse(Validator.cumpleCodigoProducto(CODIGO_ERROR_SOLONUMEROS));
+	}
+	
+	/**
+	 * Comprueba validación de codigo de producto
+	 */
+	@Test
+	void testcumpleCodigoProducto() {
+		assertTrue(Validator.cumpleCodigoProducto(CODIGO_OK));
+	}
+	
+	/**
+	 * Comprueba validación de codigo de producto con inicio en minusucla
+	 */
+	@Test
+	void testcumpleCodigoProductoErrorMinuscula() {
+		assertFalse(Validator.cumpleCodigoProducto(CODIGO_ERROR_MINUSCULA));
+	}
+	
+	/**
+	 * Comprueba validación de codigo de producto con longitud erronea
+	 */
+	@Test
+	void testcumpleCodigoProductoErrorLongitud() {
+		assertFalse(Validator.cumpleCodigoProducto(CODIGO_ERROR_LONGITUD));
+	}
+	
+	/**
+	 * Comprueba validación de codigo de producto pattern erroneo
+	 */
+	@Test
+	void testcumpleCodigoProductoError() {
+		assertFalse(Validator.cumpleCodigoProducto(CODIGO_ERROR));
+	}
+	
+	/**
+	 * Comprueba validación de codigo de producto siendo vacio
+	 */
+	@Test
+	void testcumpleCodigoProductoVacio() {
+		assertFalse(Validator.cumpleCodigoProducto(CODIGO_VACIO));
+	}
+	
+	/**
+	 * Comprueba validación de codigo de producto siendo nulo
+	 */
+	@Test
+	void testcumpleCodigoProductoNulo() {
+		assertFalse(Validator.cumpleCodigoProducto(CODIGO_NULO));
+	}
 	
 	/**
 	 * Comprueba validación de cadena correcta
