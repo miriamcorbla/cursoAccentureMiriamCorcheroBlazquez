@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author m.corchero.blazquez
  *
  */
-public class NombreApellido {
+public class EscrituraNombreApellido {
 
 	public static void main(String[] args) {
 		try (Scanner sc = new Scanner(System.in)) {
