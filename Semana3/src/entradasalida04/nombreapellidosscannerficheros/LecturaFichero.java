@@ -6,6 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Clase que lee del fichero y devuelve la cadena con todo lo que contiene dicho fichero
+ * @author m.corchero.blazquez
+ *
+ */
 public class LecturaFichero {
 
 	public static void main(String[] args) {
