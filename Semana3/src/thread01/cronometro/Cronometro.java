@@ -11,11 +11,9 @@ public class Cronometro {
 		int tiempo = 1000; // 1 segundo
 		
 		for(int i = 0; i<24; i++) {
-			Thread.sleep(tiempo); //dormimos el hilo principal durante un segundo antes de pasar al siguiente for
 			for(int j = 0; j < 60; j++) {
-				Thread.sleep(tiempo);
 				for(int k = 0; k < 60; k++) {
-					Thread.sleep(tiempo);
+					Thread.sleep(tiempo);//dormimos el hilo principal durante un segundo
 					System.out.println(String.format("%02d:%02d:%02d", i, j, k)); //imprimimos con el formato indicado
 				}
 			}
