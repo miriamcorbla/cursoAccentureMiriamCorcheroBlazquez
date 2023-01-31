@@ -29,8 +29,8 @@ public class EscrituraNombreApellido {
 				//ruta del fichero donde escribir
 				fichero = new FileWriter("C:\\Users\\m.corchero.blazquez\\OneDrive - Accenture\\cursoWorkspace\\Semana3\\src\\entradasalida04\\nombreapellidosscannerficheros\\FicheroGrabarNombreApellido.txt");
 				escribir = new PrintWriter(fichero);
-				escribir.println(nombre); //escribimos
-				escribir.println(apellido);
+				escribir.println("NOMBRE="+nombre); //escribimos
+				escribir.println("APELLIDO="+apellido);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}finally {

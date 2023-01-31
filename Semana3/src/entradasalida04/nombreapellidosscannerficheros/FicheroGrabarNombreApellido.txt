@@ -1,2 +1,2 @@
-Miriam
-Corchero
+NOMBRE=Miriam
+APELLIDO=Corchero
