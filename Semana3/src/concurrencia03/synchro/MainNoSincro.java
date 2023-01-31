@@ -6,7 +6,7 @@ package concurrencia03.synchro;
  * @author m.corchero.blazquez
  *
  */
-public class Main {
+public class MainNoSincro {
 
 	public static void main(String[] args) {
 		NoSincro s1 = new NoSincro();
