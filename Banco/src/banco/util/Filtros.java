@@ -23,9 +23,12 @@ public class Filtros {
 		return ((tamTexto>=tamMin) && (tamTexto<=tamMax));
 	}
 	
-	public static boolean filtroFechaAnio(LocalDate fecha, int anioMax, int anioMin) {
-		if( fecha != null) {
-			return ((fecha.getYear()>=anioMin) && (fecha.getYear()<=anioMax));	
+	public static boolean filtroFechaAnio(LocalDate fecha, int max, int min) {
+		if(fecha != null) {
+			LocalDate fechaComprobacion = LocalDate.now();
+			LocalDate fechaMin = fechaComprobacion.minusYears(min);
+			LocalDate fechaMax = fechaComprobacion.plusYears(max);
+			return ((fecha.isAfter(fechaMin)) && (fecha.isBefore(fechaMax)));	
 		}else {
 			return false;
 		}			

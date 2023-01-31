@@ -12,11 +12,11 @@ class FiltrosTest {
 	final static String TITULAR1 = "Este titular es de 21";
 	final static String TITULAR2 = "Este";
 	final static String TITULAR3 = "Este es un";
-	final static int ANIOMAX = 2026;
-	final static int ANIOMIN = 2023;
+	final static int ANIOMAX = 5;
+	final static int ANIOMIN = 3;
 	final static LocalDate FECHA = LocalDate.now();
 	final static LocalDate FECHA1 = LocalDate.of(2000, 12, 21);
-	final static LocalDate FECHA2 = LocalDate.of(2027, 12, 12);
+	final static LocalDate FECHA2 = LocalDate.of(2029, 12, 12);
 	final static LocalDate FECHA3 = LocalDate.of(2026, 10, 5);
 	final static LocalDate FECHA4 = LocalDate.of(2025, 8, 7);
 	final static LocalDate FECHA5 = null;
