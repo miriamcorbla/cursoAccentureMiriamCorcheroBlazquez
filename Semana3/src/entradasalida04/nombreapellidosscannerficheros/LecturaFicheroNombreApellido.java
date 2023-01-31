@@ -16,7 +16,7 @@ public class LecturaFicheroNombreApellido {
 	public static void main(String[] args) {
 		File ficheroALeer = null; //fichero que leeremos
 		FileReader leyendo = null;
-		StringBuilder cadenaFinal = new StringBuilder(); //String donde guardar todo lo que contiene el fichero y mostrarlo por pantalla
+		StringBuilder cadenaFinal = new StringBuilder(); //String donde guardar lo que contiene el fichero y mostrarlo por pantalla
 		BufferedReader buffer = null;
 		
 		//Ubicación del fichero a leer
@@ -28,7 +28,14 @@ public class LecturaFicheroNombreApellido {
 			String nombreapellidos;
 			try {
 				while ((nombreapellidos = buffer.readLine()) != null) { //iteramos liena a linea sobre el fichero a leer
-					cadenaFinal.append(nombreapellidos + " "); //lo añadimos a la cadena que devolveremos al final
+					String[] texto = nombreapellidos.split("=");
+					if(texto[0].equals("NOMBRE")) {
+						cadenaFinal.append(texto[1]);
+					}
+					if(texto[0].equals("APELLIDO")) {
+						cadenaFinal.append(" " + texto[1]);
+					}
+					//cadenaFinal.append(nombreapellidos + " "); //lo añadimos a la cadena que devolveremos al final
 				}
 				System.out.println(cadenaFinal); //mostramos resultado
 			} catch (IOException e) {
