@@ -1,4 +1,4 @@
-package thread01.cronometro;
+package concurrencia01.cronometro;
 
 /**
  * Clase que, utilizando el método sleep,
