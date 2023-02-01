@@ -37,7 +37,7 @@ public class Jugador {
 		this.mano = mano;
 	}
 	
-	public String jugador() {
+	public String mostrarJugador() {
 		return getNombre() + " " + getEdad() + " ";
 	}
 

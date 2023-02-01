@@ -1,10 +1,11 @@
 package juegocartas;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -21,6 +22,7 @@ public class Juego {
 	private static Set<Jugador> jugadores;
 	
 	public static void aniadeJugadores() {
+		jugadores = new HashSet<Jugador>();
 		
 		int NUMJUGADORES = 4;
 		int[] edad = {28, 33, 21, 45};
@@ -29,24 +31,35 @@ public class Juego {
 		Jugador jugador1 = new Jugador();
 		jugador1.setEdad(edad[0]);
 		jugador1.setNombre(nombre[0]);
+		jugadores.add(jugador1);
 		
 		Jugador jugador2 = new Jugador();
-		jugador1.setEdad(edad[1]);
-		jugador1.setNombre(nombre[1]);
+		jugador2.setEdad(edad[1]);
+		jugador2.setNombre(nombre[1]);
+		jugadores.add(jugador2);
 		
 		Jugador jugador3 = new Jugador();
-		jugador1.setEdad(edad[2]);
-		jugador1.setNombre(nombre[2]);
+		jugador3.setEdad(edad[2]);
+		jugador3.setNombre(nombre[2]);
+		jugadores.add(jugador3);
 		
 		Jugador jugador4 = new Jugador();
-		jugador1.setEdad(edad[3]);
-		jugador1.setNombre(nombre[3]);
+		jugador4.setEdad(edad[3]);
+		jugador4.setNombre(nombre[3]);
+		jugadores.add(jugador4);
 		
-		//Añadimos los jugadores al set de jugadores
-		jugadores.add(jugador1);
-		jugadores.add(jugador2);
-		jugadores.add(jugador3);
-		jugadores.add(jugador4);		
+		/*
+		 *  POR TERMINAR -- FUTURO 
+		 
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduzca los jugadores");
+		for(int i = 0; i<NUMJUGADORES; i++) {
+			System.out.println("Jugador " + i);
+			System.out.println("Introduzca su nombre: ");
+			
+		}*/
+		
+		
 	}	
 	
 	public void repartirCarta(int cantidadCartas, Jugador jugador) {
@@ -54,13 +67,41 @@ public class Juego {
 		//indiquen al jugador indicado
 	}
 	
+	public static Set<Carta> barajarMazo() {
+	     List<Carta> listaCartas = new ArrayList<Carta>(mazo); //casteamos a list para poder usar shuffle
+	     
+	     for(int i = 0; i<3; i++) {
+	    	 Collections.shuffle(listaCartas); //permutamos tres veces la lista
+	     }
+	 
+	     Set<Carta> mazoBarajado = new HashSet<Carta>();
+	     mazoBarajado.addAll(listaCartas); 
+	     
+	     return mazoBarajado;
+	}
+	
 	
 	public static void main(String[] args) {
+		//vamos a añadir nuestra baraja española al mazo con el que jugaremos
 		baraja = new Baraja();
 		mazo = baraja.getBaraja().stream().collect(Collectors.toSet()); //añado mi baraja española al mazo de juego
-		System.out.println(mazo.size());
-		mazo.forEach(System.out::println);
+		System.out.println("Mazo: ");
+		for(Carta c : mazo) {
+			System.out.println(c.mostrarCarta());
+		}
 		
+		//Vamos a barajar el mazo. El set es aleatorio, pero para darle más realismo, vamos a barajar 3 veces más
+		//permutando los valores del set
+		System.out.println("Mazo barajado: ");
+		mazo = barajarMazo();
+		for(Carta c : mazo) {
+			System.out.println(c.mostrarCarta()); //Seguir por aquí porque no ha permutado nada. probar con ctor y Random
+		}	
+		
+		aniadeJugadores(); //añadimos al set los jugadores y los mostramos
+		for(Jugador j : jugadores) {
+			System.out.println(j.mostrarJugador());
+		}
 	}
 
 }
