@@ -23,8 +23,8 @@ public class Carta {
 		this.tipo = tipo;
 	}
 	
-	public String getCarta() {
-		return numero + tipo;
+	public String mostrarCarta() {
+		return getNumero() + " " + getTipo();
 	}
 
 }
