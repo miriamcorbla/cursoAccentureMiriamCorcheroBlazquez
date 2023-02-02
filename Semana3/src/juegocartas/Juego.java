@@ -127,17 +127,17 @@ public class Juego {
 	}
 
 	/**
-	 * Comprueba si una carta es la única de su palo en la mano del jugador
+	 * Comprueba si una carta es la única de su numero en la mano del jugador
 	 * 
 	 * @param jugador
 	 * @param carta
 	 * @return verdadero o falso
 	 */
 	public static boolean esUnica(Jugador jugador, Carta carta) {
-		String tipo = carta.getTipo();
+		int numero = carta.getNumero();
 		for (Carta c : jugador.getMano()) {
-			String tipoCartaMano = c.getTipo();
-			if (tipo.equals(tipoCartaMano) && !carta.equals(c)) { // aqui hay un problema
+			int numeroCartaMano = c.getNumero();
+			if ((numero == numeroCartaMano) && !carta.equals(c)) {
 				return false;
 			}
 		}
@@ -145,22 +145,23 @@ public class Juego {
 	}
 
 	/**
-	 * Método que elimina las cartas de palos unicos que 
+	 * Método que elimina las cartas de numeros unicos que 
 	 * tiene el jugador en su mano, y recoge tantas cartas
 	 * como se haya eliminado
 	 */
 	public static void descarteDeCartas() {
-		for (Jugador j : jugadores) {
+		for (Jugador j : jugadores) { //itero jugadores
 			int contadorDescarte = 0;
-			Iterator<Carta> itMano = j.getMano().iterator();
-			while(itMano.hasNext()) {
-				boolean unica = esUnica(j, itMano.next());
-				if(unica) {
-					itMano.remove();
-					contadorDescarte++;
+			Iterator<Carta> itMano = j.getMano().iterator(); //iterador en la mano del jugador actual
+			while(itMano.hasNext()) { 
+				boolean unica = esUnica(j, itMano.next()); 
+				if(unica) {//si es unico palo en la mano del jugador
+					itMano.remove(); //lo borro
+					contadorDescarte++; //actualizo contador
 				}
 			}
-			repartirCarta(j, contadorDescarte);
+			//ya tengo los descartes hechos del jugador actual
+			repartirCarta(j, contadorDescarte); //le añado tantas cartas como cartas descartadas
 		}
 	}
 
