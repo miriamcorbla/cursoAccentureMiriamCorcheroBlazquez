@@ -14,10 +14,9 @@ public class Baraja {
 	int maxNumCartaPorPalo = 13;
 	private Set<Carta> baraja = new HashSet<Carta>(maximoCartas);
 	
-	String[] palos = {"pica", "corazon", "trebol", "diamante"};
+	private String[] palos = {"pica", "corazon", "trebol", "diamante"};
 
 
-	
 	public void cargarBarajaPoker() {
 		for(int i = 0; i<palos.length; i++) {
 			for(int j = 1; j<=maxNumCartaPorPalo; j++) {
@@ -37,6 +36,14 @@ public class Baraja {
 		for(Carta c : baraja) {
 			System.out.println(c.mostrarCarta());
 		}
+	}
+	
+	public String[] getPalos() {
+		return palos;
+	}
+
+	public void setPalos(String[] palos) {
+		this.palos = palos;
 	}
 	
 	public Baraja() {
