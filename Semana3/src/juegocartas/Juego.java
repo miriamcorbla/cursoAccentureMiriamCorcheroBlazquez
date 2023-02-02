@@ -31,6 +31,8 @@ public class Juego {
 		int[] edad = {28, 33, 21, 45};
 		String[] nombre = {"Miriam", "Lucas", "Alfredo", "Sandra"}; 
 		
+		//HACERLO CON LOS VECTORES y BUCLES!
+		
 		Jugador jugador1 = new Jugador();
 		jugador1.setEdad(edad[0]);
 		jugador1.setNombre(nombre[0]);
@@ -78,7 +80,7 @@ public class Juego {
 		}
 	}
 	
-	public static void repartirCartasInicioJuego() {
+	public static void repartirCartasInicioJuego() { // VOY POR AQUI -- TERMINAR!!
 		Iterator itJugadores = jugadores.iterator();
 		int contadorNumCartas = 0;
 		while(contadorNumCartas < NUMMAXCARTAS) {
@@ -139,7 +141,7 @@ public class Juego {
 		}
 		System.out.println("******************************");
 		
-		repartirCartasInicioJuego();
+		repartirCartasInicioJuego(); //TERMINAR!!!
 		System.out.println("*** MANOS DE LOS JUGADORES ***");
 		mostrarManoJugadores();
 	}
