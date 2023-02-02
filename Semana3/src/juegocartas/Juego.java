@@ -68,9 +68,9 @@ public class Juego {
 
 		while (numeroCartas > 0) {
 			if (itMazo.hasNext()) {
-				Carta c = (Carta) itMazo.next(); // obtengo mi carta del mazo
+				Carta c = (Carta) itMazo.next(); //obtengo mi carta del mazo
 				jugador.aniadirCartaAMano(c);
-				itMazo.remove(); // la elimino del mazo
+				itMazo.remove(); //la elimino del mazo
 			}
 			numeroCartas--;
 		}
@@ -82,16 +82,16 @@ public class Juego {
 	public static void repartirCartasInicioJuego() {
 		Iterator itJugadores = jugadores.iterator();
 		int contadorNumCartas = 0;
-		while (contadorNumCartas < NUMMAXCARTAS) { // mientras no haya repartido cinco cartas a cada jugador
-			while (itJugadores.hasNext()) { // recorro el set de jugadores
+		while (contadorNumCartas < NUMMAXCARTAS) { //mientras no haya repartido cinco cartas a cada jugador
+			while (itJugadores.hasNext()) { //recorro el set de jugadores
 				Jugador j = (Jugador) itJugadores.next();
-				repartirCarta(j, 1); // le reparto una carta
+				repartirCarta(j, 1); //le reparto una carta
 			}
-			if (!itJugadores.hasNext()) { // si he finalizado de recorrer el set, empiezo de nuevo poniendo el it al
-											// incio
+			if (!itJugadores.hasNext()) { //si he finalizado de recorrer el set, empiezo de nuevo poniendo el it al
+											//incio
 				itJugadores = jugadores.iterator();
 			}
-			contadorNumCartas++; // aumento el contador hasta llegar al total repartido = 5 por jugador
+			contadorNumCartas++; //aumento el contador hasta llegar al total repartido = 5 por jugador
 		}
 
 	}
@@ -100,10 +100,10 @@ public class Juego {
 	 * Muestra la mano de los jugadores
 	 */
 	public static void mostrarManoJugadores() {
-		for (Jugador j : jugadores) { // itero set jugadores
-			System.out.println("Jugador: " + j.getNombre()); // muestro su nombre
-			for (Carta c : j.getMano()) { // itero set de cartas del jugador
-				System.out.println(c.mostrarCarta()); // muestro las cartas
+		for (Jugador j : jugadores) { //itero set jugadores
+			System.out.println("Jugador: " + j.getNombre()); //muestro su nombre
+			for (Carta c : j.getMano()) { //itero set de cartas del jugador
+				System.out.println(c.mostrarCarta()); //muestro las cartas
 			}
 			System.out.println("----------------------");
 		}
@@ -115,9 +115,9 @@ public class Juego {
 	 * @return el mazo de cartas barajado
 	 */
 	public static Set<Carta> barajarMazo() {
-		List<Carta> listaCartas = new ArrayList<Carta>(mazo); // casteamos a list para poder usar shuffle
+		List<Carta> listaCartas = new ArrayList<Carta>(mazo); //casteamos a list para poder usar shuffle
 
-		for (int i = 0; i < 3; i++) { // barajamos tres veces
+		for (int i = 0; i < 3; i++) { //barajamos tres veces
 			Collections.shuffle(listaCartas, new Random());
 		}
 		Set<Carta> mazoBarajado = new HashSet<Carta>();
@@ -164,6 +164,56 @@ public class Juego {
 			repartirCarta(j, contadorDescarte); //le añado tantas cartas como cartas descartadas
 		}
 	}
+	
+	public static void analizandoMano(Set<Carta> mano) {
+		List<Integer> manoAnalizar = new ArrayList<Integer>();
+		for(Carta c : mano) {
+			manoAnalizar.add(c.getNumero());
+		}
+		//elimino duplicados
+		Set<Integer> miSet = new HashSet<Integer>(manoAnalizar);
+		System.out.println("NumCarta|NumVeces");
+		for(int i : miSet) {
+			System.out.println(i + "\t " + Collections.frequency(manoAnalizar,i));
+		}
+	}
+	
+	public static boolean esPareja(Set<Carta> mano, Carta carta) {
+		List<Integer> manoAnalizar = new ArrayList<Integer>();
+		for(Carta c : mano) {
+			manoAnalizar.add(c.getNumero());
+		}
+		//elimino duplicados
+		Set<Integer> miSet = new HashSet<Integer>(manoAnalizar);
+		if(Collections.frequency(manoAnalizar, carta.getNumero()) == 2) {
+			return true;
+		}else {
+			return false;
+		}
+
+		
+	}
+	
+	
+	/**
+	 * Analiza el juego y muestra el ganador
+	 */
+	public static void analisisJuego() { //SIN TERMINAR
+
+		for(Jugador j : jugadores) {
+			System.out.println("------------------------");
+			System.out.println("Mano de " + j.getNombre());
+			
+			analizandoMano(j.getMano());
+			Iterator<Carta> itCartas = j.getMano().iterator();
+			
+			while(itCartas.hasNext()) {
+				boolean esParejaCarta = esPareja(j.getMano(), itCartas.next());
+				System.out.println(" Es Pareja: " + esParejaCarta);
+			}
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		// vamos a añadir nuestra baraja española al mazo con el que jugaremos
@@ -199,6 +249,12 @@ public class Juego {
 		descarteDeCartas();
 		System.out.println("*** MANOS DE LOS JUGADORES POST DESCARTE ***");
 		mostrarManoJugadores();
+		
+		System.out.println("*** ANÁLISIS DE JUEGO ***");
+		System.out.println("*************************");
+		analisisJuego();
+		/*
+		System.out.println("**** FIN ****");
+		mostrarManoJugadores();*/
 	}
-
 }
