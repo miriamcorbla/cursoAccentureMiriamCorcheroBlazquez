@@ -10,11 +10,11 @@ import java.util.Set;
  */
 public class Baraja {
 	
-	int maximoCartas = 48;
-	int maxNumCartaPorPalo = 12;
+	int maximoCartas = 52;
+	int maxNumCartaPorPalo = 13;
 	private Set<Carta> baraja = new HashSet<Carta>(maximoCartas);
 	
-	String[] palos = {"oros", "copas", "espadas", "bastos"};
+	String[] palos = {"pica", "corazon", "trebol", "diamante"};
 
 
 	

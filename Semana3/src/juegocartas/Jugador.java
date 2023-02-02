@@ -2,15 +2,16 @@ package juegocartas;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Jugador {
-	
+	private static final int MAXNUMMANO = 5;
 	private String nombre;
 	private int edad;
 	private Set<Carta> mano;
 	
 	public Jugador() {
-		mano = new HashSet<Carta>();
+		mano = new HashSet<>(MAXNUMMANO);
 	}
 	
 	public String getNombre() {
@@ -34,11 +35,15 @@ public class Jugador {
 	}
 	
 	public void setMano(Set<Carta> mano) {
-		this.mano = mano;
+		this.mano = mano.stream().collect(Collectors.toSet());
+	}
+	
+	public void aniadirCartaAMano(Carta c) {
+		mano.add(c);
 	}
 	
 	public String mostrarJugador() {
-		return getNombre() + " " + getEdad() + " ";
+		return "Nombre: " + getNombre() + "\tEdad:" + getEdad();
 	}
 
 }

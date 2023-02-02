@@ -3,7 +3,9 @@ package juegocartas;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,6 +16,7 @@ import java.util.stream.Collectors;
  *
  */
 public class Juego {
+	private static final int NUMMAXCARTAS = 5;
 	
 	private static Baraja baraja; 
 	
@@ -61,21 +64,50 @@ public class Juego {
 		
 		
 	}	
+	/**
+	 * REPARTE UNA CARTA A UN JUGADOR
+	 * @param jugador
+	 */
+	public static void repartirCarta(Jugador jugador) {
+		Iterator itMazo = mazo.iterator();
+		
+		if(itMazo.hasNext()) {
+			Carta c = (Carta) itMazo.next(); //obtengo mi carta del mazo
+			jugador.aniadirCartaAMano(c);
+			itMazo.remove(); //la elimino del mazo
+		}
+	}
 	
-	public void repartirCarta(int cantidadCartas, Jugador jugador) {
-		//este metodo tiene que repartir las cartas del mazo que se
-		//indiquen al jugador indicado
+	public static void repartirCartasInicioJuego() {
+		Iterator itJugadores = jugadores.iterator();
+		int contadorNumCartas = 0;
+		while(contadorNumCartas < NUMMAXCARTAS) {
+			while(itJugadores.hasNext()) {
+				Jugador j = (Jugador) itJugadores.next();
+				repartirCarta(j);
+			}
+		}
+	}
+	
+	public static void mostrarManoJugadores() {
+		for(Jugador j : jugadores) {
+			System.out.println("Jugador: " + j.getNombre());
+			for(Carta c : j.getMano()) {
+				System.out.println(c.mostrarCarta());
+			}
+			System.out.println("----------------------");
+		}
 	}
 	
 	public static Set<Carta> barajarMazo() {
 	     List<Carta> listaCartas = new ArrayList<Carta>(mazo); //casteamos a list para poder usar shuffle
-	     
-	     for(int i = 0; i<3; i++) {
-	    	 Collections.shuffle(listaCartas); //permutamos tres veces la lista
-	     }
 	 
+	     for(int i = 0; i<3; i++) { //barajamos tres veces
+	    	 Collections.shuffle(listaCartas, new Random());
+	     }	     
 	     Set<Carta> mazoBarajado = new HashSet<Carta>();
 	     mazoBarajado.addAll(listaCartas); 
+	     
 	     
 	     return mazoBarajado;
 	}
@@ -85,23 +117,31 @@ public class Juego {
 		//vamos a añadir nuestra baraja española al mazo con el que jugaremos
 		baraja = new Baraja();
 		mazo = baraja.getBaraja().stream().collect(Collectors.toSet()); //añado mi baraja española al mazo de juego
-		System.out.println("Mazo: ");
+		System.out.println("************ MAZO *************");
 		for(Carta c : mazo) {
 			System.out.println(c.mostrarCarta());
 		}
+		System.out.println("******************************");
 		
 		//Vamos a barajar el mazo. El set es aleatorio, pero para darle más realismo, vamos a barajar 3 veces más
 		//permutando los valores del set
-		System.out.println("Mazo barajado: ");
+		System.out.println("******* MAZO BARAJADO ********");
 		mazo = barajarMazo();
 		for(Carta c : mazo) {
 			System.out.println(c.mostrarCarta()); //Seguir por aquí porque no ha permutado nada. probar con ctor y Random
 		}	
+		System.out.println("******************************");
 		
 		aniadeJugadores(); //añadimos al set los jugadores y los mostramos
+		System.out.println("********* JUGADORES **********");
 		for(Jugador j : jugadores) {
 			System.out.println(j.mostrarJugador());
 		}
+		System.out.println("******************************");
+		
+		repartirCartasInicioJuego();
+		System.out.println("*** MANOS DE LOS JUGADORES ***");
+		mostrarManoJugadores();
 	}
 
 }
