@@ -30,28 +30,17 @@ public class Juego {
 		int NUMJUGADORES = 4;
 		int[] edad = {28, 33, 21, 45};
 		String[] nombre = {"Miriam", "Lucas", "Alfredo", "Sandra"}; 
-		
-		//HACERLO CON LOS VECTORES y BUCLES!
-		
-		Jugador jugador1 = new Jugador();
-		jugador1.setEdad(edad[0]);
-		jugador1.setNombre(nombre[0]);
-		jugadores.add(jugador1);
-		
-		Jugador jugador2 = new Jugador();
-		jugador2.setEdad(edad[1]);
-		jugador2.setNombre(nombre[1]);
-		jugadores.add(jugador2);
-		
-		Jugador jugador3 = new Jugador();
-		jugador3.setEdad(edad[2]);
-		jugador3.setNombre(nombre[2]);
-		jugadores.add(jugador3);
-		
-		Jugador jugador4 = new Jugador();
-		jugador4.setEdad(edad[3]);
-		jugador4.setNombre(nombre[3]);
-		jugadores.add(jugador4);
+
+		for(String s : nombre) {
+			Jugador jugador = new Jugador();
+			jugador.setNombre(s);
+			jugadores.add(jugador);
+		}
+		int i = 0;
+		for(Jugador j : jugadores) {
+			j.setEdad(edad[i]);
+			i++;
+		}
 		
 		/*
 		 *  POR TERMINAR -- FUTURO 

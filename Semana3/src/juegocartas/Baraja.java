@@ -18,7 +18,7 @@ public class Baraja {
 
 
 	
-	public void cargarBarajaEsp() {
+	public void cargarBarajaPoker() {
 		for(int i = 0; i<palos.length; i++) {
 			for(int j = 1; j<=maxNumCartaPorPalo; j++) {
 				Carta carta = new Carta();
@@ -40,7 +40,7 @@ public class Baraja {
 	}
 	
 	public Baraja() {
-		cargarBarajaEsp();
+		cargarBarajaPoker();
 	}
 
 }
