@@ -32,28 +32,38 @@ public class Juego {
 		jugadores = new HashSet<Jugador>();
 
 		int NUMJUGADORES = 4;
-		int[] edad = { 28, 33, 21, 45 };
-		String[] nombre = { "Miriam", "Lucas", "Alfredo", "Sandra" };
-
+		String nombre;
+		int edad;
+		int[] edades = { 28, 33, 21, 45 };
+		String[] nombres = { "Miriam", "Lucas", "Alfredo", "Sandra" };
 		int i = 0;
-		for (String s : nombre) {
+		for (String s : nombres) {
 			Jugador jugador = new Jugador();
 			jugador.setNombre(s);
-			jugador.setEdad(edad[i]);
+			jugador.setEdad(edades[i]);
 			jugadores.add(jugador);
 			i++;
 		}
-
 		/*
-		 * POR TERMINAR -- FUTURO
-		 * 
-		 * Scanner sc = new Scanner(System.in);
-		 * System.out.println("Introduzca los jugadores"); for(int i = 0;
-		 * i<NUMJUGADORES; i++) { System.out.println("Jugador " + i);
-		 * System.out.println("Introduzca su nombre: ");
-		 * 
-		 * }
-		 */
+		 *
+		for(int i = 0; i<NUMJUGADORES; i++) {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("\nIntroduzca los datos de los jugadores\n");
+			System.out.println("***********");
+			System.out.println("*JUGADOR "+(i+1)+"*");
+			System.out.println("***********");
+			
+			System.out.println("Nombre: ");
+			nombre = sc.next();
+			System.out.println("Edad: ");
+			edad = sc.nextInt();
+			
+			Jugador jugador = new Jugador();
+			jugador.setNombre(nombre);
+			jugador.setEdad(edad);
+			jugadores.add(jugador);
+		}
+		*/
 
 	}
 
@@ -184,14 +194,22 @@ public class Juego {
 			manoAnalizar.add(c.getNumero());
 		}
 		//elimino duplicados
-		Set<Integer> miSet = new HashSet<Integer>(manoAnalizar);
 		if(Collections.frequency(manoAnalizar, carta.getNumero()) == 2) {
 			return true;
 		}else {
 			return false;
+		}		
+	}
+	
+	public static Set<Carta> borrarPareja(Set<Carta> mano, int numCartaBorrar) {
+		Set<Carta> manoProcesada = new HashSet<Carta>(mano);
+		Iterator<Carta> it = manoProcesada.iterator();
+		while(it.hasNext()) {
+			if(it.next().getNumero() == numCartaBorrar) {
+				it.remove();
+			}
 		}
-
-		
+		return manoProcesada;
 	}
 	
 	
@@ -204,57 +222,66 @@ public class Juego {
 			System.out.println("------------------------");
 			System.out.println("Mano de " + j.getNombre());
 			
-			analizandoMano(j.getMano());
-			Iterator<Carta> itCartas = j.getMano().iterator();
+			Set<Carta> manoProcesada = new HashSet<Carta>(j.getMano());
 			
-			while(itCartas.hasNext()) {
-				boolean esParejaCarta = esPareja(j.getMano(), itCartas.next());
-				System.out.println(" Es Pareja: " + esParejaCarta);
+			analizandoMano(j.getMano());
+			
+			for(Carta c : j.getMano()) {
+				boolean esParejaCarta = esPareja(j.getMano(), c);
+				System.out.println("El numero " + c.getNumero() + " es Pareja: " + esParejaCarta);
+				int num = c.getNumero();
+				if(esParejaCarta) {
+					manoProcesada = borrarPareja(j.getMano(), num);
+				}
 			}
+			j.setMano(manoProcesada);
 		}
 		
 	}
 
 	public static void main(String[] args) {
+		System.out.println("*********************************");
+		System.out.println("***********JUEGO PÓKER***********");
+		System.out.println("*********************************\n");
 		// vamos a añadir nuestra baraja española al mazo con el que jugaremos
 		baraja = new Baraja();
 		mazo = baraja.getBaraja().stream().collect(Collectors.toSet()); // añado mi baraja española al mazo de juego
-		System.out.println("************ MAZO *************");
+		System.out.println("************* MAZO **************");
 		for (Carta c : mazo) {
 			System.out.println(c.mostrarCarta());
 		}
-		System.out.println("******************************");
+		System.out.println("*********************************");
 
 		// Vamos a barajar el mazo. El set es aleatorio, pero para darle más realismo,
 		// vamos a barajar 3 veces más
 		// permutando los valores del set
-		System.out.println("******* MAZO BARAJADO ********");
+		System.out.println("********* MAZO BARAJADO *********");
 		mazo = barajarMazo();
 		for (Carta c : mazo) {
 			System.out.println(c.mostrarCarta());
 		}
-		System.out.println("******************************");
+		System.out.println("*********************************");
 
 		aniadeJugadores(); // añadimos al set los jugadores y los mostramos
-		System.out.println("********* JUGADORES **********");
+		System.out.println("*********** JUGADORES ***********");
 		for (Jugador j : jugadores) {
 			System.out.println(j.mostrarJugador());
 		}
-		System.out.println("******************************");
+		System.out.println("*********************************");
 
 		repartirCartasInicioJuego();
-		System.out.println("*** MANOS DE LOS JUGADORES ***");
+		System.out.println("**** MANOS DE LOS JUGADORES ****");
 		mostrarManoJugadores();
 
 		descarteDeCartas();
 		System.out.println("*** MANOS DE LOS JUGADORES POST DESCARTE ***");
 		mostrarManoJugadores();
 		
-		System.out.println("*** ANÁLISIS DE JUEGO ***");
-		System.out.println("*************************");
+		System.out.println("******* ANÁLISIS DE JUEGO ******");
+		System.out.println("********************************");
 		analisisJuego();
-		/*
+		
 		System.out.println("**** FIN ****");
-		mostrarManoJugadores();*/
+		mostrarManoJugadores();
 	}
 }
