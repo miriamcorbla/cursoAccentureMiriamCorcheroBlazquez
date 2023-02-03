@@ -2,6 +2,8 @@ package es.rf.tienda.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
@@ -47,6 +49,26 @@ class ValidatorTest {
 	static final int VALOR_ERRORMAX = 20;
 	static final int VALOR_ERRORMIN = -8;
 	
+	static final double VALOR_DOUBLE = 3.4;
+	static final double VALOR_DOUBLE_ERRORMAX = 20.01;
+	static final double VALOR_DOUBLE_ERRORMIN = -8.8;
+	
+	static final String TEXTO_LONGITUD = "hola que tal";
+	static final String TEXTO_LONGITUD_ERROR = "hola que";
+	static final String TEXTO_LONGITUD_ERROR_MAX = "hola que tal tal tal tal tal tal";
+	static final int LONGITUD_MIN = 10;
+	static final int LONGITUD_MAX = 20;
+	
+	static final LocalDate FECHA_CORRECTA = LocalDate.now();
+	static final LocalDate FECHA_ERROR_MIN = LocalDate.of(2019, 1, 22);
+	static final LocalDate FECHA_ERROR_MAX = LocalDate.of(2033, 1, 22);
+	static final LocalDate FECHA_MIN = LocalDate.of(2020, 1, 22);
+	static final LocalDate FECHA_MAX = LocalDate.of(2030, 1, 22);
+	
+	static final String FECHA_STR_CORRECTA = "22/01/2022";
+	static final String FECHA_STR_ERROR = "22-01-2022";
+	static final String FECHA_STR_ERROR2 = "22.01.2022";
+	
 	/**
 	 * Comprueba validación de codigo de producto siendo este
 	 * solo de numeros y cumpliendo la longitud
@@ -60,7 +82,7 @@ class ValidatorTest {
 	 * Comprueba validación de codigo de producto
 	 */
 	@Test
-	void testcumpleCodigoProducto() {
+	void testCumpleCodigoProducto() {
 		assertTrue(Validator.cumpleCodigoProducto(CODIGO_OK));
 	}
 	
@@ -251,42 +273,97 @@ class ValidatorTest {
 		assertFalse(Validator.cumpleRango(VALOR_ERRORMAX, VALOR_MIN, VALOR_MAX));
 	}
 
-
 	@Test
 	void testCumpleRangoDoubleIntInt() {
-		fail("Not yet implemented");
+		assertTrue(Validator.cumpleRango(VALOR_DOUBLE, VALOR_MIN, VALOR_MAX));
+	}
+	
+	@Test
+	void testCumpleRangoDoubleIntIntValorMin() {
+		assertTrue(Validator.cumpleRango((double)VALOR_MIN, VALOR_MIN, VALOR_MAX));
+	}
+	
+	@Test
+	void testCumpleRangoDoubleIntIntValorMax() {
+		assertTrue(Validator.cumpleRango((double)VALOR_MAX, VALOR_MIN, VALOR_MAX));
+	}
+	
+	@Test
+	void testCumpleRangoDoubleIntIntValorErrorMin() {
+		assertFalse(Validator.cumpleRango(VALOR_DOUBLE_ERRORMIN, VALOR_MIN, VALOR_MAX));
+	}
+	
+	@Test
+	void testCumpleRangoDoubleIntIntValorErrorMax() {
+		assertFalse(Validator.cumpleRango(VALOR_DOUBLE_ERRORMAX, VALOR_MIN, VALOR_MAX));
 	}
 
 	@Test
 	void testCumpleLongitudMin() {
-		fail("Not yet implemented");
+		assertTrue(Validator.cumpleLongitudMin(TEXTO_LONGITUD, LONGITUD_MIN));
+	}
+	
+	@Test
+	void testCumpleLongitudMinError() {
+		assertFalse(Validator.cumpleLongitudMin(TEXTO_LONGITUD_ERROR, LONGITUD_MIN));
 	}
 
 	@Test
 	void testCumpleLongitudMax() {
-		fail("Not yet implemented");
+		assertTrue(Validator.cumpleLongitudMax(TEXTO_LONGITUD, LONGITUD_MAX));
+	}
+	
+	@Test
+	void testCumpleLongitudMaxError() {
+		assertFalse(Validator.cumpleLongitudMax(TEXTO_LONGITUD_ERROR_MAX, LONGITUD_MAX));
 	}
 
 	@Test
 	void testCumpleLongitud() {
-		fail("Not yet implemented");
+		assertTrue(Validator.cumpleLongitud(TEXTO_LONGITUD, LONGITUD_MIN, LONGITUD_MAX));
+	}
+	
+	@Test
+	void testCumpleLongitudError() {
+		assertFalse(Validator.cumpleLongitud(TEXTO_LONGITUD_ERROR, LONGITUD_MIN, LONGITUD_MAX));
 	}
 
 	@Test
 	void testValDateMin() {
-		fail("Not yet implemented");
+		assertTrue(Validator.valDateMin(FECHA_CORRECTA, FECHA_MIN));
+	}
+	
+	@Test
+	void testValDateMinError() {
+		assertFalse(Validator.valDateMin(FECHA_ERROR_MIN, FECHA_MIN));
 	}
 
 	@Test
 	void testValDateMax() {
-		fail("Not yet implemented");
+		assertTrue(Validator.valDateMax(FECHA_CORRECTA, FECHA_MAX));
 	}
+	
+	@Test
+	void testValDateMaxError() {
+		assertFalse(Validator.valDateMax(FECHA_ERROR_MAX, FECHA_MAX));
+	}
+	
 
 	@Test
 	void testEsFechaValida() {
-		fail("Not yet implemented");
+		assertTrue(Validator.esFechaValida(FECHA_STR_CORRECTA));
 	}
-
+	/* TERMINARRRR
+	@Test
+	void testEsFechaValidaError() {
+		assertFalse(Validator.esFechaValida(FECHA_STR_ERROR));
+	}
+	
+	@Test
+	void testEsFechaValidaError2() {
+		assertFalse(Validator.esFechaValida(FECHA_STR_ERROR2));
+	}
+*/
 	@Test
 	void testEsPasswordValida() {
 		fail("Not yet implemented");
