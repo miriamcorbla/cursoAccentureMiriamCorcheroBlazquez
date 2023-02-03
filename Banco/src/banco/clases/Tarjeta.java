@@ -2,6 +2,9 @@ package banco.clases;
 
 import java.time.LocalDate;
 
+import banco.util.ErrorFiltro;
+import banco.util.Filtros;
+
 /**
  * Clase abstracta tarjeta
  * @author m.corchero.blazquez
@@ -12,18 +15,32 @@ public abstract class Tarjeta {
 	private LocalDate mFechaDeCaducidad;
 	private String mNumero;
 	private String mTitular;
+	private final int Y_MAX = 5;
+	private final int Y_MIN = 3;
+	private final int MAX_STRING = 30;
+	private final int MIN_STRING = 15;
 	
 	/**
 	 * Constructor parametrizado
 	 * @param mFechaDeCaducidad
 	 * @param mNumero
 	 * @param mTitular
+	 * @throws ErrorFiltro 
 	 */
-	protected Tarjeta(LocalDate mFechaDeCaducidad, String mNumero, String mTitular) {
+	protected Tarjeta(LocalDate mFechaDeCaducidad, String mNumero, String mTitular) throws ErrorFiltro {
 		super();
-		this.mFechaDeCaducidad = mFechaDeCaducidad;
+		if(Filtros.filtroFechaAnio(mFechaDeCaducidad,Y_MAX,Y_MIN)) {
+			this.mFechaDeCaducidad = mFechaDeCaducidad;
+		}else {
+			throw new ErrorFiltro("Fecha incorrecta");
+		}
+		
 		this.mNumero = mNumero;
-		this.mTitular = mTitular;
+		if(Filtros.filtroTexto(mTitular, MAX_STRING, MIN_STRING)){
+			this.mTitular = mTitular;
+		}else {
+			throw new ErrorFiltro("Tamaño titular incorrecto");
+		}
 	}
 	/**
 	 * Método modificador de cuenta

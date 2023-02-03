@@ -51,7 +51,30 @@ public class Filtros {
 	
 	
 	public static LocalDate fechaFormatoCorrecto(String fecha) {
-		return fechaFormatoCorrecto(fecha, "dd-mm-yyyy");
+		return fechaFormatoCorrecto(fecha, "dd-MM-yyyy");
 	}
+	
+	
+	
+	/**
+	 * Comprueba si el saldo es positivo
+	 * @param saldo
+	 * @return verdadero o falso
+	 */
+	public static boolean esSaldoPositivo(double saldo) {
+		return saldo > 0;
+	}
+	
+	/**
+	 * Comprueba dado el saldo de la cuenta y el que se desesa retirar
+	 * si es posible realizar dicha operación
+	 * @param retiro
+	 * @param saldoActual
+	 * @return verdadero si el saldo de la cuenta es mayor que el que se desea retirar
+	 */
+	public static boolean haySaldoSuficiente(double retiro, double saldoActual) {
+		return saldoActual >= retiro;
+	}
+	
 
 }

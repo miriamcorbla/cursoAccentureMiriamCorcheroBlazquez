@@ -8,22 +8,27 @@ import org.junit.jupiter.api.Test;
 
 class FiltrosTest {
 	
-	final static String TITULAR = "";
-	final static String TITULAR1 = "Este titular es de 21";
-	final static String TITULAR2 = "Este";
-	final static String TITULAR3 = "Este es un";
-	final static int ANIOMAX = 5;
-	final static int ANIOMIN = 3;
-	final static LocalDate FECHA = LocalDate.now();
-	final static LocalDate FECHA1 = LocalDate.of(2000, 12, 21);
-	final static LocalDate FECHA2 = LocalDate.of(2029, 12, 12);
-	final static LocalDate FECHA3 = LocalDate.of(2026, 10, 5);
-	final static LocalDate FECHA4 = LocalDate.of(2025, 8, 7);
-	final static LocalDate FECHA5 = null;
-	final static String FECHACORRECTADEFECTO = "30-01-22";
-	final static String FECHACORRECTABARRAS = "30/01/22";
-	final static String FECHAINCORRECTA =  "30.01.22";
-	final static String FECHAINCORRECTA2 = "estoNoEsUnFormato";
+	static final String TITULAR = "";
+	static final String TITULAR1 = "Este titular es de 21";
+	static final String TITULAR2 = "Este";
+	static final String TITULAR3 = "Este es un";
+	static final int ANIOMAX = 5;
+	static final int ANIOMIN = 3;
+	static final LocalDate FECHA = LocalDate.now();
+	static final LocalDate FECHA1 = LocalDate.of(2000, 12, 21);
+	static final LocalDate FECHA2 = LocalDate.of(2029, 12, 12);
+	static final LocalDate FECHA3 = LocalDate.of(2026, 10, 5);
+	static final LocalDate FECHA4 = LocalDate.of(2025, 8, 7);
+	static final LocalDate FECHA5 = null;
+	static final String FECHA_CORRECTA_DEFECTO = "30-01-2022";
+	static final LocalDate FECHA_CORRECTA_DEFECTO_LD = LocalDate.of(2022, 01, 30);
+	static final String FECHA_CORRECTA_BARRAS = "30/01/2022";
+	static final String FECHA_INCORRECTA =  "30.01.2022";
+	static final String FORMATO_CORRECTO2 = "dd/MM/yyyy";
+	static final int SALDO_POSITIVO = 30;
+	static final int SALDO_NEGATIVO = -20;
+	static final int SALDO_ACTUAL = 50;
+	static final int SALDO_ACTUAL_ERROR = 10;
 	
 	/**
 	 * Vamos a comprobar que el titular de 21 no es correcto
@@ -112,17 +117,66 @@ class FiltrosTest {
 	}
 	
 	/**
-	 * Test para formato. AUN POR TERMINAR!!!!
+	 * Test para formato.
 	 */
 	@Test
 	void testFiltroFormatoFechaPorDefecto() {
-		assertEquals(FECHACORRECTADEFECTO, Filtros.fechaFormatoCorrecto(FECHACORRECTADEFECTO));
+		LocalDate fecha = Filtros.fechaFormatoCorrecto(FECHA_CORRECTA_DEFECTO); 
+		assertEquals(FECHA_CORRECTA_DEFECTO_LD, fecha);
 	}
 	
+	/**
+	 * Test para fecha con formato barras
+	 */
 	@Test
 	void testFiltroFormatoFechaBarras() {
-		assertEquals(FECHACORRECTABARRAS, Filtros.fechaFormatoCorrecto(FECHACORRECTABARRAS, "dd/mm/yyyy"));
+		LocalDate fecha = Filtros.fechaFormatoCorrecto(FECHA_CORRECTA_BARRAS, FORMATO_CORRECTO2);
+		assertEquals(FECHA_CORRECTA_DEFECTO_LD, fecha);
 	}
 	
+	/**
+	 * Test para fecha con formato incorrecto.
+	 */
+	@Test
+	void testFiltroFormatoFechaError() {
+		LocalDate fecha = Filtros.fechaFormatoCorrecto(FECHA_INCORRECTA);
+		assertNotEquals(FECHA_CORRECTA_DEFECTO_LD, fecha);
+	}
+	
+	
+	/**
+	 * Test para saldo positivo
+	 */
+	@Test
+	void testSaldoPositivo() {
+		assertTrue(Filtros.esSaldoPositivo(SALDO_POSITIVO));
+	}
+	
+	/**
+	 * Tes para comprobar que si introduce un saldo negativo 
+	 * el resultado que arroja es false
+	 */
+	@Test
+	void testSaldoPositivoError() {
+		assertFalse(Filtros.esSaldoPositivo(SALDO_NEGATIVO));
+	}
+	
+	/**
+	 * Tes para comprobar que hay saldo suficiente
+	 * para retirar dicha cantidad de dinero
+	 */
+	@Test
+	void testSaldoSuficiente() {
+		assertTrue(Filtros.haySaldoSuficiente(SALDO_POSITIVO, SALDO_ACTUAL));
+	}
+	
+	/**
+	 * Tes para comprobar que arroja resultado falso dado una
+	 * cantidad a retirar mayor que el saldo disponible en la cuenta
+	 */
+	@Test
+	void testSaldoSuficienteError() {
+		assertFalse(Filtros.haySaldoSuficiente(SALDO_POSITIVO, SALDO_ACTUAL_ERROR));
+	}
 
 }

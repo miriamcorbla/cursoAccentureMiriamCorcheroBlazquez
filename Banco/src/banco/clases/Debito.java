@@ -2,6 +2,8 @@ package banco.clases;
 
 import java.time.LocalDate;
 
+import banco.util.ErrorFiltro;
+
 /**
  * Clase débito
  * @author m.corchero.blazquez
@@ -14,8 +16,9 @@ public class Debito extends Tarjeta{
 	 * @param mFechaDeCaducidad
 	 * @param mNumero
 	 * @param mTitular
+	 * @throws ErrorFiltro 
 	 */
-	public Debito(LocalDate mFechaDeCaducidad, String mNumero, String mTitular) {
+	public Debito(LocalDate mFechaDeCaducidad, String mNumero, String mTitular) throws ErrorFiltro {
 		super(mFechaDeCaducidad, mNumero, mTitular);
 	}
 

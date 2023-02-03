@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import banco.util.ErrorFiltro;
+import banco.util.Filtros;
+
 /**
  * Clase crédito
  * @author m.corchero.blazquez
@@ -15,14 +18,17 @@ public class Credito extends Tarjeta{
 	private ArrayList<Movimiento> mMovimientos = new ArrayList<Movimiento>();
 	private double mCredito;
 	private final double COMISION = 3.0; 
+	private final int MAX_TEXTO = 100;
+	private final int MIN_TEXTO = 10;
 	
 	/**
 	 * Constructor parametrizado de la clase crédito
 	 * @param fechaCaducidad
 	 * @param numero
 	 * @param titular
+	 * @throws ErrorFiltro 
 	 */
-	public Credito(LocalDate fechaCaducidad, String numero, String titular, double mCredito) {
+	public Credito(LocalDate fechaCaducidad, String numero, String titular, double mCredito) throws ErrorFiltro {
 		super(fechaCaducidad, numero, titular);
 		this.mCredito = mCredito;
 	}
@@ -66,11 +72,16 @@ public class Credito extends Tarjeta{
 	/**
 	 * Paga con tarjeta crédito, si tiene
 	 * dinero suficiente
+	 * @throws ErrorFiltro 
 	 */
-	public void pagoEnEstablecimiento(String datos, double x) {
+	public void pagoEnEstablecimiento(String datos, double x) throws ErrorFiltro {
 		if(getCreditoDisponible() >= x) { //si tengo crédito suficiente
 			Movimiento m = new Movimiento();
-			m.setmConcepto("Compra a crédito en: " + datos);
+			if(Filtros.filtroTexto(datos, MAX_TEXTO, MIN_TEXTO)) {
+				m.setmConcepto("Compra a crédito en: " + datos);
+			}else {
+				throw new ErrorFiltro("Tamaño concepto insuficiente");
+			}			
 			m.setmImporte(-x);
 			this.mMovimientos.add(m);
 			mCredito -= x; //Actualiza el total de crédito
