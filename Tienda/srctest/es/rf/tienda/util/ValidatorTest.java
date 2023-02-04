@@ -6,6 +6,10 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Clase que prueba los métodos de la clase Validator
+ * @author m.corchero.blazquez
+ */
 class ValidatorTest {
 	
 	static final String CODIGO_OK = "PR332";
