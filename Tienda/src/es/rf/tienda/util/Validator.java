@@ -2,6 +2,7 @@ package es.rf.tienda.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,12 +38,14 @@ public class Validator {
 	 * Permite validar un teléfono, el cual debe contener de 10 a 20 dígitos y donde
 	 * los espacios están permitidos
 	 */
-	private static final String PHONE_PATTERN = "[\\d ]{10,20}";
+	private static final String PHONE_PATTERN = "[\\d]{10,20}";
 
 	/**
 	 * Orden de las letras con las cuales se comprobará la validez del DNI
 	 */
 	private static final String LETRA_DNI = "TRWAGMYFPDXBNJZSQVHLCKE";
+	
+	private static final String FECHA_PATTERN = "^([0-2][0-9])(\\/)(0[1-9]|1[0-2])\\2(\\d{4})$";
 
 	/**
 	 * Longitud que debe tener los DNI pasado a la aplicación.
@@ -121,7 +124,23 @@ public class Validator {
 	 * 
 	 **************************************************************************************/
 	public static boolean cumplePhoneNumber(String phoneNumber) {
-		return !isVacio(phoneNumber) && phoneNumber.matches(PHONE_PATTERN);
+		if(isVacio(phoneNumber)) {
+			return false;
+		}
+		long numDigitos = phoneNumber.chars().filter(n -> Character.isDigit(n)).count();
+		if(!cumpleRango(numDigitos, 10, 20)){
+			return false;
+		}
+		if(cumpleLongitud(phoneNumber, 10, 20)) { //si cumple longitud
+			for(int i = 0; i<phoneNumber.length(); i++) { //vemos si los caracteres no son espacios en blanco o digitos
+				if(!(Character.isWhitespace(phoneNumber.charAt(i)) || Character.isDigit(phoneNumber.charAt(i)))) {
+					return false;
+				}
+			}
+		}else {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -164,7 +183,30 @@ public class Validator {
 	 * 
 	 **************************************************************************************/
 	public static boolean cumpleDNI(String dni) {
-		return !isVacio(dni) && dni.matches(DNI_PATTERN) && (dni.length() == LONGITUD_DNI);
+		return !isVacio(dni) && dni.matches(DNI_PATTERN) && (dni.length() == LONGITUD_DNI) && cumpleLetraDNI(dni);
+	}
+	
+	public static boolean cumpleLetraDNI (String dni) {
+		char [] letras = {'T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E'};
+		String[] dniDividido = dni.split("-");
+		char letraDNI = dniDividido[1].charAt(0);	
+		
+		ArrayList<Character> listaNum = new ArrayList<>();
+        for(int i = 0; i < dni.length(); i++){
+            if(Character.isDigit(dni.charAt(i)))
+                listaNum.add(dni.charAt(i));
+        }
+        
+        StringBuilder cadenaNum = new StringBuilder();
+        for(Character c : listaNum) {
+        	cadenaNum.append(c);
+        }
+        
+        int numFinal = Integer.parseInt(cadenaNum.toString());
+        
+        int resto = numFinal % 23;
+        char letraCorrespondiente = letras[resto];
+        return letraDNI == letraCorrespondiente;
 	}
 
 	/**
@@ -296,10 +338,7 @@ public class Validator {
 	 * @author m.corchero.blazquez
 	 */
 	public static boolean esFechaValida(String fecha) {
-		DateTimeFormatter miFormato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); // Creo un Formatter con el formato que
-																					// me pasan
-		LocalDate miFecha = LocalDate.parse(fecha, miFormato); // me creo la fecha con el formato
-		return !isVacio(fecha) && fecha.equals(miFecha.toString()); // comrpueba si la fecha sigue el patron de fecha
+		return !isVacio(fecha) && fecha.matches(FECHA_PATTERN);
 	}
 
 	/**
