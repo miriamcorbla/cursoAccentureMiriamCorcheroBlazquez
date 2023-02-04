@@ -86,6 +86,11 @@ class ValidatorTest {
 	static final String PSWD_ERROR4 = "holahola3";
 	static final String PSWD_ERROR5 = "holaHola!";
 	static final String PSWD_ERROR6 = "hHa$3";
+	
+	static final String TEXTO_WHITESPACES = "Texto con espacios en blanco y numeros 1822";
+	static final String TEXTO_SIN_ESPACIOS = "TextoSinEspaciosTambienValido";
+	static final String TEXTO_ERROR_SPECIALCHARS = "Texto no ! permitido * ";
+	static final String TEXTO_CON_SOLO_ESPACIO = " ";
 	/**
 	 * Comprueba validación de codigo de producto siendo este
 	 * solo de numeros y cumpliendo la longitud
@@ -631,5 +636,46 @@ class ValidatorTest {
 	void testEsPasswordValidaError6() {
 		assertFalse(Validator.esPasswordValida(PSWD_ERROR6));
 	}	
+	
+	/**
+	 * Comprueba que el texto es alfanumérico y permite espacios en blanco
+	 */
+	@Test
+	void testTextoWhiteSpaces() {
+		assertTrue(Validator.isAlfanumericWhiteSpaces(TEXTO_WHITESPACES));
+	}
+	
+	/**
+	 * Comprueba que el texto es alfanumérico aunque no tenga espacios en blanco
+	 */
+	@Test
+	void testTextoWhiteSpacesSinEspacios() {
+		assertTrue(Validator.isAlfanumericWhiteSpaces(TEXTO_SIN_ESPACIOS));
+	}
+	
+	/**
+	 * Comprueba que arroja falso al recibir un texto con caracteres especiales
+	 */
+	@Test
+	void testTextoWhiteSpacesError() {
+		assertFalse(Validator.isAlfanumericWhiteSpaces(TEXTO_ERROR_SPECIALCHARS));
+	}
+	
+	/**
+	 * Comprueba que arroja falso al recibir un nulo o vacio
+	 */
+	@Test
+	void testTextoWhiteSpacesErrorNuloVacio() {
+		assertFalse(Validator.isAlfanumericWhiteSpaces(TEXTO_NULO));
+		assertFalse(Validator.isAlfanumericWhiteSpaces(TEXTO_VACIO));
+	}
+	
+	/**
+	 * Comprueba que arroja falso al recibir texto que contiene solo un espacio
+	 */
+	@Test
+	void testTextoWhiteSpacesErrorSoloEspacio() {
+		assertFalse(Validator.isAlfanumericWhiteSpaces(TEXTO_CON_SOLO_ESPACIO));
+	}
 
 }

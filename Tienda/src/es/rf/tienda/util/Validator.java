@@ -20,6 +20,8 @@ public class Validator {
 
 	private static final String ALFANUMERIC_PATTERN = "^[0-9a-zA-Z]+$";
 	
+	private static final String ALFANUMERIC_PATTERN_WHITESPACES = "^\\s*[\\da-zA-Z][\\da-zA-Z\\s]*$";
+	
 	private static final String CODE_PATTERN = "[A-Z]{2}+\\d{3}";
 
 	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
@@ -79,6 +81,26 @@ public class Validator {
 			esAlfanumerico = texto.chars().allMatch(Character::isLetterOrDigit); // uso streams para calcularlo mas facilmente en lugar de con un for y un if
 		}
 		return esAlfanumerico; // devuelvo true si es alfanumerico, o false si no lo es
+	}
+	
+	/**
+	 * ***************************************************************************************
+	 * NOMBRE: isAlfanumeric Con espacios en blanco permitidos
+	 * 
+	 * DESCRIPCIÓN:
+	 * Permite verificar que el texto pasado solo contiene caracters alfanuméricos o espacios en blanco
+	 * 
+	 * @param texto String a verificar
+	 * @return true, si cumple solo contiene caracteres alfanuméricos o espacios en blanco. 
+	 *         false en caso contrario
+	 * 
+	 *         FECHA: Febrero 2023
+	 * 
+	 * @author m.corchero.blazquez
+	 * 
+	 **************************************************************************************/
+	public static boolean isAlfanumericWhiteSpaces(String texto) {
+		return !isVacio(texto) && texto.matches(ALFANUMERIC_PATTERN_WHITESPACES);
 	}
 	
 	/**
