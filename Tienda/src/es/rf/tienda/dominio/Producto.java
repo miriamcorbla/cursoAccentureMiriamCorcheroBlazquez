@@ -9,6 +9,7 @@ import es.rf.tienda.util.Validator;
 /**
  * Clase producto
  * @author m.corchero.blazquez
+ * @version Feb2023
  *
  */
 public class Producto {

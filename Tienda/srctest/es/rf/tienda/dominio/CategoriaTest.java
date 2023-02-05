@@ -8,6 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import es.rf.tienda.exception.DomainException;
 
+/**
+ * Clase prueba para dominio Categoria
+ * @author m.corchero.blazquez
+ * @version Feb2023
+ *
+ */
 class CategoriaTest {
 	
 	Categoria categoria;

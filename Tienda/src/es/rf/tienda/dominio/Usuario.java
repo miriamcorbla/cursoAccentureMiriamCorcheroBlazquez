@@ -8,6 +8,7 @@ import es.rf.tienda.util.Validator;
 /**
  * Clase usuario
  * @author m.corchero.blazquez
+ * @version Feb2023
  *
  */
 public class Usuario {

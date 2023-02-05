@@ -10,7 +10,7 @@ import es.rf.tienda.exception.DomainException;
 /**
  * Clase que comprueba el dominio Direccion
  * @author m.corchero.blazquez
- *
+ * @version Feb2023
  */
 class DireccionTest {
 	

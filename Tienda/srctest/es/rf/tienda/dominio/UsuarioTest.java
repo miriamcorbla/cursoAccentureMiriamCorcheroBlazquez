@@ -12,6 +12,11 @@ import org.junit.jupiter.api.TestInstance;
 
 import es.rf.tienda.exception.DomainException;
 
+/**
+ * Clase prueba dominio usuario
+ * @author m.corchero.blazquez
+ * @version Feb2023
+ */
 class UsuarioTest {
 	
 	Usuario usuario;

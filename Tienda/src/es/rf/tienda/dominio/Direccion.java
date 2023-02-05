@@ -6,7 +6,7 @@ import es.rf.tienda.util.Validator;
 /**
  * Clase dirección
  * @author m.corchero.blazquez
- *
+ * @version Feb2023
  */
 public class Direccion {
 	
