@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
 
+import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import es.rf.tienda.exception.DomainException;
 
@@ -65,8 +68,9 @@ class UsuarioTest {
 	/**
 	 * Test que comprueba que el id del usuario es autoincremental
 	 */
-	@Test
-	void testGetId_usuario() {
+	@BeforeAll
+	static void testGetId_usuario() {
+		Usuario usuario = new Usuario();
 		assertEquals(ID_USUARIO, usuario.getId_usuario());
 	}
 	

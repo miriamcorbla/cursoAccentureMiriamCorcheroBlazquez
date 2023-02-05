@@ -32,7 +32,7 @@ public class Usuario {
 
 
 	public Usuario() {
-		setId_usuario(idAutoincremental++);
+		setId_usuario(++idAutoincremental);
 	}
 
 	/**
