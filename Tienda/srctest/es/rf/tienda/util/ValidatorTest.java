@@ -91,6 +91,12 @@ class ValidatorTest {
 	static final String TEXTO_SIN_ESPACIOS = "TextoSinEspaciosTambienValido";
 	static final String TEXTO_ERROR_SPECIALCHARS = "Texto no ! permitido * ";
 	static final String TEXTO_CON_SOLO_ESPACIO = " ";
+	
+	static final double NUM_DECIMAL = 35.982;
+	static final int NUM_DECIMAL_PROBAR = 3;
+	static final int NUM_DECIMAL_ERROR = 4;
+	
+	
 	/**
 	 * Comprueba validación de codigo de producto siendo este
 	 * solo de numeros y cumpliendo la longitud
@@ -491,6 +497,15 @@ class ValidatorTest {
 	}
 	
 	/**
+	 * Comprueba que la fecha es igual a la fecha mínima permitida
+	 */
+	@Test
+	void testValDateExacMin() {
+		assertTrue(Validator.valDateMin(FECHA_CORRECTA, FECHA_CORRECTA));
+	}
+	
+	
+	/**
 	 * Comprueba que arroja falso si la fecha no llega a la mínima permitida
 	 */
 	@Test
@@ -512,6 +527,14 @@ class ValidatorTest {
 	@Test
 	void testValDateMaxError() {
 		assertFalse(Validator.valDateMax(FECHA_ERROR_MAX, FECHA_MAX));
+	}
+	
+	/**
+	 * Comprueba que la fecha es igual a la fecha maxima permitida
+	 */
+	@Test
+	void testValDateExacMax() {
+		assertTrue(Validator.valDateMin(FECHA_CORRECTA, FECHA_CORRECTA));
 	}
 	
 	/**
@@ -676,6 +699,25 @@ class ValidatorTest {
 	@Test
 	void testTextoWhiteSpacesErrorSoloEspacio() {
 		assertFalse(Validator.isAlfanumericWhiteSpaces(TEXTO_CON_SOLO_ESPACIO));
+	}
+	
+	/**
+	 * Comprueba que arroja verdadero al recibir un decimal y el numero de 
+	 * decimales que contiene
+	 */
+	@Test
+	void testNumDecimal() {
+		assertTrue(Validator.cumpleDecimales(NUM_DECIMAL, NUM_DECIMAL_PROBAR));
+	}
+	
+	/**
+	 * Comprueba que arroja falso al recibir un decimal y el numero de 
+	 * decimales que contiene que no corresponde con la cantidad
+	 * de decimales que tiene ese número
+	 */
+	@Test
+	void testNumDecimalError() {
+		assertFalse(Validator.cumpleDecimales(NUM_DECIMAL, NUM_DECIMAL_ERROR));
 	}
 
 }

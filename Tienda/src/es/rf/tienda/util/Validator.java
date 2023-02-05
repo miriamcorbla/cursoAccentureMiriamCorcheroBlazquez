@@ -127,6 +127,31 @@ public class Validator {
 
 	/**
 	 * ***************************************************************************************
+	 * NOMBRE: intDecimales *
+	 * 
+	 * DESCRIPCIÓN:
+	 *
+	 * El double debe tener el numero de decimales que se reciba
+	 * 
+	 * @param number numero decimal a procesar.
+	 * 
+	 * @return true, si cumple que tiene la cantidad de decimales que se le indican
+	 *
+	 *         FECHA: Febrero 2023
+	 * @author m.corchero.blazquez
+	 * 
+	 **************************************************************************************/
+	public static boolean cumpleDecimales(double number, int numDecimales) {
+		if((Double.toString(number).split("\\.")[1].length()) == numDecimales) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
+	/**
+	 * ***************************************************************************************
 	 * NOMBRE: cumplePhoneNumber *
 	 * 
 	 * DESCRIPCIÓN:
@@ -335,7 +360,7 @@ public class Validator {
 	 */
 
 	public static boolean valDateMin(LocalDate fecha, LocalDate min) {
-		return fecha.isAfter(min); // comprueba si la fecha después de la fecha minima
+		return (fecha.isAfter(min) || fecha.isEqual(min)); // comprueba si la fecha después de la fecha minima
 	}
 
 	/**
@@ -347,7 +372,7 @@ public class Validator {
 	 * @author m.corchero.blazquez
 	 */
 	public static boolean valDateMax(LocalDate fecha, LocalDate max) {
-		return fecha.isBefore(max); // si la fecha es antes de la fecha maxima
+		return fecha.isBefore(max) || fecha.isEqual(max); // si la fecha es antes de la fecha maxima
 
 	}
 
