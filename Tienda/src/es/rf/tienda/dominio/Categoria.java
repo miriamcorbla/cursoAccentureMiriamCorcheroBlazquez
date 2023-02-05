@@ -1,26 +1,32 @@
 package es.rf.tienda.dominio;
 
+import es.rf.tienda.exception.DomainException;
 import es.rf.tienda.util.Validator;
 
 /**
  * 
  * Nombre		Categoria
  * Descripcion	Lista de categorías
- * @author 		Miguel Garcia
- * @version		13 de abr. de 2016
+ * @author 		Miguel Garcia. Modificaciones: Miriam Corchero
+ * @version		Febrero 2023
  *
  */
 public class Categoria {
 	
-	private int id_categoria;			//identificador categoria
+	private static int autonumerico_id = 0;
+	private int id_categoria;			//identificador categoria AUTOINCREMENTAL
 	
 	private String cat_nombre;			//nombre de la categoria
 	
 	private String cat_descripcion;		//descripcion de la categoria
 	
+	private final int LONG_MIN = 5;
+	private final int LONG_MAX = 50;
+	private final int LONG_MAX_DESCR = 200;
 	
-	public Categoria(){}
-	
+	public Categoria() throws DomainException{
+		setId_categoria(++autonumerico_id);
+	}
 	
 	public boolean isValid(){	
 		return !Validator.isVacio(cat_nombre) &&
@@ -37,10 +43,12 @@ public class Categoria {
 	
 	/**
 	 * Setter para identificador de categoria
+	 * @throws DomainException 
 	 * 
 	 */
-	public void setId_categoria(int id_categoria) {
+	public void setId_categoria(int id_categoria) throws DomainException {
 		this.id_categoria = id_categoria;
+
 	}
 	
 	/**
@@ -53,10 +61,17 @@ public class Categoria {
 	
 	/**
 	 * Setter para el nombre de categoria
+	 * @throws DomainException 
 	 * 
 	 */
-	public void setCat_nombre(String cat_nombre) {
-		this.cat_nombre = cat_nombre;
+	public void setCat_nombre(String cat_nombre) throws DomainException {
+		if(Validator.isAlfanumericWhiteSpaces(cat_nombre) &&
+				Validator.cumpleLongitud(cat_nombre, LONG_MIN, LONG_MAX)) {
+			this.cat_nombre = cat_nombre;
+		}else {
+			throw new DomainException();
+		}
+		
 	}
 	
 	/**
@@ -69,10 +84,17 @@ public class Categoria {
 	
 	/**
 	 * setter para la descripcion de categoria
+	 * @throws DomainException 
 	 * 
 	 */
-	public void setCat_descripcion(String cat_descripcion) {
-		this.cat_descripcion = cat_descripcion;
+	public void setCat_descripcion(String cat_descripcion) throws DomainException {
+		if(Validator.isAlfanumericWhiteSpaces(cat_descripcion) &&
+				Validator.cumpleLongitudMax(cat_descripcion, LONG_MAX_DESCR)) {
+			this.cat_descripcion = cat_descripcion;
+		}else {
+			throw new DomainException();
+		}
+
 	}
 
 
